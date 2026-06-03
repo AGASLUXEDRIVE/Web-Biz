@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIFA World Cup 2026™ - Official Ticketing Platform</title>
+    <title>FIFA World Cup 2026™ - Official Ticketing</title>
     <meta name="description" content="Secure your official FIFA World Cup 2026™ match tickets. Browse matches, select seats, and book your World Cup experience.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -93,7 +93,6 @@
             background: var(--gold);
             color: #000;
         }
-        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -104,7 +103,6 @@
             background: var(--border-strong);
             border-radius: 3px;
         }
-        /* Navbar */
         .navbar {
             position: fixed;
             top: 0;
@@ -244,7 +242,6 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-        /* Page Container */
         .page {
             display: none;
             padding-top: 70px;
@@ -269,7 +266,6 @@
             margin: 0 auto;
             padding: 0 2rem;
         }
-        /* Hero Section */
         .hero {
             position: relative;
             min-height: 90vh;
@@ -388,7 +384,6 @@
             width: 100%;
             justify-content: center;
         }
-        /* Countdown */
         .countdown-section {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border);
@@ -429,7 +424,6 @@
                 transform: scale(1.05);
             }
         }
-        /* Section Styles */
         .section {
             padding: 4rem 0;
         }
@@ -455,7 +449,6 @@
             border-radius: 2px;
             margin: 1rem auto;
         }
-        /* Match Cards */
         .match-cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -555,7 +548,6 @@
                 opacity: 0.4;
             }
         }
-        /* City Cards */
         .city-cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -596,7 +588,6 @@
             font-size: 0.85rem;
             color: var(--text-muted);
         }
-        /* Search Bar */
         .search-section {
             background: var(--bg-secondary);
             padding: 1.5rem 0;
@@ -631,7 +622,6 @@
             border-color: var(--gold);
             box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.1);
         }
-        /* Ticket Detail Page */
         .ticket-detail-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -724,7 +714,6 @@
             cursor: not-allowed;
             opacity: 0.4;
         }
-        /* Cart Sidebar */
         .cart-overlay {
             position: fixed;
             inset: 0;
@@ -819,7 +808,6 @@
             padding-top: 0.5rem;
             border-top: 1px solid var(--border);
         }
-        /* Checkout Form */
         .form-group {
             margin-bottom: 1.2rem;
         }
@@ -877,7 +865,6 @@
             border-color: var(--gold);
             background: var(--badge-bg);
         }
-        /* Dashboard */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 250px 1fr;
@@ -938,7 +925,6 @@
             justify-content: center;
             flex-shrink: 0;
         }
-        /* Glass Card */
         .glass-card {
             background: var(--bg-glass);
             backdrop-filter: blur(16px);
@@ -948,7 +934,6 @@
             box-shadow: var(--glass-shadow);
             padding: 2rem;
         }
-        /* Toast */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -979,7 +964,6 @@
                 transform: translateY(20px);
             }
         }
-        /* Mobile Bottom Nav */
         .mobile-bottom-nav {
             display: none;
             position: fixed;
@@ -1010,7 +994,6 @@
         .mobile-bottom-nav a i {
             font-size: 1.2rem;
         }
-        /* Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -1038,7 +1021,6 @@
             border: 1px solid var(--border);
             box-shadow: var(--shadow-lg);
         }
-        /* Footer */
         .footer {
             background: var(--bg-tertiary);
             border-top: 1px solid var(--border);
@@ -1099,7 +1081,6 @@
             cursor: pointer;
             font-family: var(--font-body);
         }
-        /* Trust Strip */
         .trust-strip {
             display: flex;
             justify-content: center;
@@ -1123,7 +1104,6 @@
             font-size: 1.5rem;
             color: var(--gold);
         }
-        /* Responsive */
         @media (max-width: 1024px) {
             .nav-links a {
                 padding: 0.4rem 0.7rem;
@@ -1231,7 +1211,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <a href="#" class="nav-brand" onclick="navigateTo('home')">
             <span class="trophy-icon">🏆</span> FIFA World Cup 2026™
@@ -1269,7 +1248,6 @@
         </div>
     </nav>
 
-    <!-- Cart Overlay & Sidebar -->
     <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
@@ -1288,12 +1266,10 @@
         </div>
     </div>
 
-    <!-- Toast Container -->
     <div id="toastContainer"></div>
 
-    <!-- ==================== PAGE: HOME ==================== -->
+    <!-- PAGE: HOME -->
     <div class="page active" id="page-home">
-        <!-- Hero -->
         <section class="hero">
             <video class="hero-video-bg" autoplay muted loop playsinline poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080'%3E%3Crect fill='%230a0a20' width='1920' height='1080'/%3E%3C/svg%3E">
                 <source src="data:video/mp4;base64," type="video/mp4">
@@ -1312,7 +1288,6 @@
             </div>
         </section>
 
-        <!-- Countdown -->
         <section class="countdown-section">
             <div class="container">
                 <div class="countdown-grid" id="countdownGrid">
@@ -1325,7 +1300,6 @@
             </div>
         </section>
 
-        <!-- Featured Matches -->
         <section class="section">
             <div class="container">
                 <div class="section-header">
@@ -1340,7 +1314,6 @@
             </div>
         </section>
 
-        <!-- Tournament Cities -->
         <section class="section" style="background:var(--bg-secondary);">
             <div class="container">
                 <div class="section-header">
@@ -1352,7 +1325,6 @@
             </div>
         </section>
 
-        <!-- Trust Strip -->
         <section class="section">
             <div class="container">
                 <div class="trust-strip">
@@ -1365,7 +1337,7 @@
         </section>
     </div>
 
-    <!-- ==================== PAGE: MATCHES ==================== -->
+    <!-- PAGE: MATCHES -->
     <div class="page" id="page-matches">
         <div class="search-section">
             <div class="container">
@@ -1393,7 +1365,7 @@
         </section>
     </div>
 
-    <!-- ==================== PAGE: TICKET DETAILS ==================== -->
+    <!-- PAGE: TICKET DETAILS -->
     <div class="page" id="page-ticket-detail">
         <section class="section">
             <div class="container">
@@ -1402,7 +1374,7 @@
         </section>
     </div>
 
-    <!-- ==================== PAGE: CHECKOUT ==================== -->
+    <!-- PAGE: CHECKOUT -->
     <div class="page" id="page-checkout">
         <section class="section">
             <div class="container" style="max-width:800px;">
@@ -1417,7 +1389,7 @@
         </section>
     </div>
 
-    <!-- ==================== PAGE: DASHBOARD ==================== -->
+    <!-- PAGE: DASHBOARD -->
     <div class="page" id="page-dashboard">
         <section class="section">
             <div class="container">
@@ -1438,12 +1410,10 @@
         </section>
     </div>
 
-    <!-- QR Modal -->
     <div class="modal-overlay" id="qrModal">
         <div class="modal" id="qrModalContent"></div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -1484,12 +1454,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2026 FIFA World Cup Ticketing. All rights reserved. This is a demo frontend platform.</p>
+                <p>© 2026 FIFA World Cup Official Ticketing. All rights reserved. Secure & encrypted transactions.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Mobile Bottom Nav -->
     <div class="mobile-bottom-nav" id="mobileBottomNav">
         <a href="#" class="active" data-page="home" onclick="navigateTo('home')"><i class="fas fa-home"></i> Home</a>
         <a href="#" data-page="matches" onclick="navigateTo('matches')"><i class="fas fa-futbol"></i> Matches</a>
@@ -1500,7 +1469,6 @@
 
     <script>
         (function() {
-            // ============ STATE ============
             let cart = JSON.parse(localStorage.getItem('fifa_cart') || '[]');
             let purchasedTickets = JSON.parse(localStorage.getItem('fifa_purchased') || '[]');
             let currentCurrency = localStorage.getItem('fifa_currency') || 'USD';
@@ -1508,67 +1476,46 @@
             let currentPage = 'home';
             let selectedSeats = [];
 
-            // ============ SAMPLE DATA ============
             const teams = [
                 { name: 'USA', flag: '🇺🇸', code: 'USA' }, { name: 'Mexico', flag: '🇲🇽', code: 'MEX' },
                 { name: 'Canada', flag: '🇨🇦', code: 'CAN' }, { name: 'Argentina', flag: '🇦🇷', code: 'ARG' },
                 { name: 'Brazil', flag: '🇧🇷', code: 'BRA' }, { name: 'France', flag: '🇫🇷', code: 'FRA' },
-                { name: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', code: 'ENG' },
-                { name: 'Spain', flag: '🇪🇸', code: 'ESP' }, { name: 'Germany', flag: '🇩🇪', code: 'GER' },
-                { name: 'Portugal', flag: '🇵🇹', code: 'POR' }, { name: 'Netherlands', flag: '🇳🇱', code: 'NED' },
-                { name: 'Italy', flag: '🇮🇹', code: 'ITA' }, { name: 'Japan', flag: '🇯🇵', code: 'JPN' },
-                { name: 'Morocco', flag: '🇲🇦', code: 'MAR' }, { name: 'Senegal', flag: '🇸🇳', code: 'SEN' },
-                { name: 'Uruguay', flag: '🇺🇾', code: 'URU' }, { name: 'Colombia', flag: '🇨🇴', code: 'COL' },
+                { name: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', code: 'ENG' }, { name: 'Spain', flag: '🇪🇸', code: 'ESP' },
+                { name: 'Germany', flag: '🇩🇪', code: 'GER' }, { name: 'Portugal', flag: '🇵🇹', code: 'POR' },
+                { name: 'Netherlands', flag: '🇳🇱', code: 'NED' }, { name: 'Italy', flag: '🇮🇹', code: 'ITA' },
+                { name: 'Japan', flag: '🇯🇵', code: 'JPN' }, { name: 'Morocco', flag: '🇲🇦', code: 'MAR' },
+                { name: 'Senegal', flag: '🇸🇳', code: 'SEN' }, { name: 'Uruguay', flag: '🇺🇾', code: 'URU' },
+                { name: 'Colombia', flag: '🇨🇴', code: 'COL' },
             ];
 
             const cities = [
-                { name: 'New York / New Jersey',
-                    stadium: 'MetLife Stadium',
-                    capacity: '82,500',
-                    icon: '🏟️',
-                    country: 'USA' },
+                { name: 'New York / New Jersey', stadium: 'MetLife Stadium', capacity: '82,500', icon: '🏟️', country: 'USA' },
                 { name: 'Los Angeles', stadium: 'SoFi Stadium', capacity: '70,240', icon: '🏟️', country: 'USA' },
                 { name: 'Dallas', stadium: 'AT&T Stadium', capacity: '80,000', icon: '🏟️', country: 'USA' },
                 { name: 'Miami', stadium: 'Hard Rock Stadium', capacity: '64,767', icon: '🏟️', country: 'USA' },
-                { name: 'Atlanta', stadium: 'Mercedes-Benz Stadium', capacity: '71,000', icon: '🏟️',
-                country: 'USA' },
+                { name: 'Atlanta', stadium: 'Mercedes-Benz Stadium', capacity: '71,000', icon: '🏟️', country: 'USA' },
                 { name: 'Seattle', stadium: 'Lumen Field', capacity: '68,740', icon: '🏟️', country: 'USA' },
                 { name: 'Mexico City', stadium: 'Estadio Azteca', capacity: '87,523', icon: '🏟️', country: 'Mexico' },
                 { name: 'Toronto', stadium: 'BMO Field', capacity: '45,500', icon: '🏟️', country: 'Canada' },
             ];
 
             const matches = [
-                { id: 1, home: teams[3], away: teams[7], date: '2026-06-11', time: '20:00', city: cities[0],
-                    stadium: cities[0].stadium, price: 250, availability: 'medium', group: 'Opening Match' },
-                { id: 2, home: teams[0], away: teams[2], date: '2026-06-12', time: '17:00', city: cities[1],
-                    stadium: cities[1].stadium, price: 180, availability: 'high', group: 'Group A' },
-                { id: 3, home: teams[4], away: teams[8], date: '2026-06-13', time: '20:00', city: cities[2],
-                    stadium: cities[2].stadium, price: 300, availability: 'low', group: 'Group B' },
-                { id: 4, home: teams[5], away: teams[9], date: '2026-06-14', time: '18:00', city: cities[3],
-                    stadium: cities[3].stadium, price: 220, availability: 'high', group: 'Group C' },
-                { id: 5, home: teams[1], away: teams[6], date: '2026-06-15', time: '21:00', city: cities[6],
-                    stadium: cities[6].stadium, price: 200, availability: 'medium', group: 'Group D' },
-                { id: 6, home: teams[10], away: teams[12], date: '2026-06-16', time: '16:00', city: cities[4],
-                    stadium: cities[4].stadium, price: 150, availability: 'high', group: 'Group E' },
-                { id: 7, home: teams[13], away: teams[15], date: '2026-06-17', time: '19:00', city: cities[5],
-                    stadium: cities[5].stadium, price: 190, availability: 'medium', group: 'Group F' },
-                { id: 8, home: teams[14], away: teams[16], date: '2026-06-18', time: '20:00', city: cities[7],
-                    stadium: cities[7].stadium, price: 170, availability: 'high', group: 'Group G' },
-                { id: 9, home: teams[3], away: teams[4], date: '2026-06-22', time: '20:00', city: cities[0],
-                    stadium: cities[0].stadium, price: 400, availability: 'low', group: 'Group Stage' },
-                { id: 10, home: teams[5], away: teams[0], date: '2026-06-25', time: '21:00', city: cities[2],
-                    stadium: cities[2].stadium, price: 350, availability: 'medium', group: 'Group Stage' },
-                { id: 11, home: teams[1], away: teams[3], date: '2026-07-01', time: '20:00', city: cities[3],
-                    stadium: cities[3].stadium, price: 500, availability: 'low', group: 'Round of 32' },
-                { id: 12, home: teams[4], away: teams[7], date: '2026-07-07', time: '19:00', city: cities[1],
-                    stadium: cities[1].stadium, price: 650, availability: 'low', group: 'Quarter-Final' },
-                { id: 13, home: teams[3], away: teams[5], date: '2026-07-14', time: '20:00', city: cities[0],
-                    stadium: cities[0].stadium, price: 900, availability: 'low', group: 'Semi-Final' },
-                { id: 14, home: teams[0], away: teams[4], date: '2026-07-19', time: '15:00', city: cities[0],
-                    stadium: cities[0].stadium, price: 1500, availability: 'low', group: 'Final' },
+                { id: 1, home: teams[3], away: teams[7], date: '2026-06-11', time: '20:00', city: cities[0], stadium: cities[0].stadium, price: 250, availability: 'medium', group: 'Opening Match' },
+                { id: 2, home: teams[0], away: teams[2], date: '2026-06-12', time: '17:00', city: cities[1], stadium: cities[1].stadium, price: 180, availability: 'high', group: 'Group A' },
+                { id: 3, home: teams[4], away: teams[8], date: '2026-06-13', time: '20:00', city: cities[2], stadium: cities[2].stadium, price: 300, availability: 'low', group: 'Group B' },
+                { id: 4, home: teams[5], away: teams[9], date: '2026-06-14', time: '18:00', city: cities[3], stadium: cities[3].stadium, price: 220, availability: 'high', group: 'Group C' },
+                { id: 5, home: teams[1], away: teams[6], date: '2026-06-15', time: '21:00', city: cities[6], stadium: cities[6].stadium, price: 200, availability: 'medium', group: 'Group D' },
+                { id: 6, home: teams[10], away: teams[12], date: '2026-06-16', time: '16:00', city: cities[4], stadium: cities[4].stadium, price: 150, availability: 'high', group: 'Group E' },
+                { id: 7, home: teams[13], away: teams[15], date: '2026-06-17', time: '19:00', city: cities[5], stadium: cities[5].stadium, price: 190, availability: 'medium', group: 'Group F' },
+                { id: 8, home: teams[14], away: teams[16], date: '2026-06-18', time: '20:00', city: cities[7], stadium: cities[7].stadium, price: 170, availability: 'high', group: 'Group G' },
+                { id: 9, home: teams[3], away: teams[4], date: '2026-06-22', time: '20:00', city: cities[0], stadium: cities[0].stadium, price: 400, availability: 'low', group: 'Group Stage' },
+                { id: 10, home: teams[5], away: teams[0], date: '2026-06-25', time: '21:00', city: cities[2], stadium: cities[2].stadium, price: 350, availability: 'medium', group: 'Group Stage' },
+                { id: 11, home: teams[1], away: teams[3], date: '2026-07-01', time: '20:00', city: cities[3], stadium: cities[3].stadium, price: 500, availability: 'low', group: 'Round of 32' },
+                { id: 12, home: teams[4], away: teams[7], date: '2026-07-07', time: '19:00', city: cities[1], stadium: cities[1].stadium, price: 650, availability: 'low', group: 'Quarter-Final' },
+                { id: 13, home: teams[3], away: teams[5], date: '2026-07-14', time: '20:00', city: cities[0], stadium: cities[0].stadium, price: 900, availability: 'low', group: 'Semi-Final' },
+                { id: 14, home: teams[0], away: teams[4], date: '2026-07-19', time: '15:00', city: cities[0], stadium: cities[0].stadium, price: 1500, availability: 'low', group: 'Final' },
             ];
 
-            // ============ CURRENCY CONVERSION ============
             const currencyRates = { USD: 1, EUR: 0.92, GBP: 0.79, KES: 130 };
             const currencySymbols = { USD: '$', EUR: '€', GBP: '£', KES: 'KSh ' };
 
@@ -1586,45 +1533,34 @@
                 renderAll();
             }
 
-            // ============ THEME ============
             function toggleTheme() {
                 currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 document.documentElement.setAttribute('data-theme', currentTheme);
-                document.getElementById('themeIcon').className =
-                    currentTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+                document.getElementById('themeIcon').className = currentTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
                 localStorage.setItem('fifa_theme', currentTheme);
             }
 
             function initTheme() {
                 document.documentElement.setAttribute('data-theme', currentTheme);
-                document.getElementById('themeIcon').className =
-                    currentTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+                document.getElementById('themeIcon').className = currentTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
                 document.getElementById('currencySelect').value = currentCurrency;
             }
 
-            // ============ NAVIGATION ============
             function navigateTo(page) {
                 currentPage = page;
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 const targetPage = document.getElementById('page-' + page);
                 if (targetPage) targetPage.classList.add('active');
-
                 document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
                 const navLink = document.querySelector(`.nav-links a[data-page="${page}"]`);
                 if (navLink) navLink.classList.add('active');
-
-                document.querySelectorAll('.mobile-bottom-nav a[data-page]').forEach(a => a.classList.remove(
-                    'active'));
+                document.querySelectorAll('.mobile-bottom-nav a[data-page]').forEach(a => a.classList.remove('active'));
                 const mobLink = document.querySelector(`.mobile-bottom-nav a[data-page="${page}"]`);
                 if (mobLink) mobLink.classList.add('active');
-
                 if (page === 'home') renderFeaturedMatches();
-                if (page === 'matches') { populateSearchFilters();
-                    renderAllMatches(); }
+                if (page === 'matches') { populateSearchFilters(); renderAllMatches(); }
                 if (page === 'checkout') renderCheckout();
                 if (page === 'dashboard') renderDashboard();
-                if (page === 'ticket-detail') { /* handled separately */ }
-
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 if (document.getElementById('navLinks').classList.contains('show')) {
                     document.getElementById('navLinks').classList.remove('show');
@@ -1635,7 +1571,6 @@
                 document.getElementById('navLinks').classList.toggle('show');
             }
 
-            // ============ CART ============
             function toggleCart() {
                 const overlay = document.getElementById('cartOverlay');
                 const sidebar = document.getElementById('cartSidebar');
@@ -1654,33 +1589,23 @@
                 const match = matches.find(m => m.id === matchId);
                 if (!match) return;
                 const ticketPrice = price || match.price;
-                const existingItem = cart.find(item => item.matchId === matchId && item.category === category && item
-                    .seatId === seatId);
-                if (existingItem) {
-                    existingItem.qty += 1;
+                const existing = cart.find(item => item.matchId === matchId && item.category === category && item.seatId === seatId);
+                if (existing) {
+                    existing.qty += 1;
                 } else {
-                    cart.push({
-                        matchId,
-                        category,
-                        price: ticketPrice,
-                        seatId: seatId || 'GA-' + Date.now(),
-                        qty: 1,
-                        match: { ...match }
-                    });
+                    cart.push({ matchId, category, price: ticketPrice, seatId: seatId || 'GA-' + Date.now(), qty: 1, match: {...match} });
                 }
                 saveCart();
                 showToast('✅ Ticket added to cart!');
                 renderCart();
-                if (!document.getElementById('cartSidebar').classList.contains('open')) {
-                    toggleCart();
-                }
+                if (!document.getElementById('cartSidebar').classList.contains('open')) toggleCart();
             }
 
             function removeFromCart(index) {
                 cart.splice(index, 1);
                 saveCart();
                 renderCart();
-                showToast('🗑️ Item removed from cart');
+                showToast('🗑️ Item removed');
             }
 
             function updateCartQty(index, delta) {
@@ -1713,8 +1638,7 @@
                 const container = document.getElementById('cartItems');
                 const footer = document.getElementById('cartFooter');
                 if (cart.length === 0) {
-                    container.innerHTML =
-                        '<p style="color:var(--text-muted);text-align:center;padding:2rem;">Your cart is empty.</p>';
+                    container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:2rem;">Your cart is empty.</p>';
                     footer.style.display = 'none';
                 } else {
                     container.innerHTML = cart.map((item, i) => `
@@ -1745,12 +1669,10 @@
                 }
             }
 
-            // ============ CHECKOUT ============
             function renderCheckout() {
                 const container = document.getElementById('checkoutContent');
                 if (cart.length === 0) {
-                    container.innerHTML =
-                        '<p style="color:var(--text-muted);text-align:center;padding:2rem;">Your cart is empty. <a href="#" style="color:var(--gold);" onclick="navigateTo(\'matches\')">Browse matches</a> to add tickets.</p>';
+                    container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:2rem;">Your cart is empty. <a href="#" style="color:var(--gold);" onclick="navigateTo(\'matches\')">Browse matches</a> to add tickets.</p>';
                     return;
                 }
                 const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -1787,12 +1709,10 @@
               <button class="btn btn-primary btn-block" onclick="processCheckout()">🔒 Complete Payment — ${formatPrice(grandTotal)}</button>
               <p style="font-size:0.75rem;color:var(--text-muted);text-align:center;margin-top:0.8rem;"><i class="fas fa-lock"></i> Secured by 256-bit SSL encryption</p>
             `;
-                // Payment method selection
                 setTimeout(() => {
                     document.querySelectorAll('#paymentMethods .payment-option').forEach(opt => {
                         opt.addEventListener('click', function() {
-                            document.querySelectorAll('#paymentMethods .payment-option').forEach(o => o
-                                .classList.remove('selected'));
+                            document.querySelectorAll('#paymentMethods .payment-option').forEach(o => o.classList.remove('selected'));
                             this.classList.add('selected');
                         });
                     });
@@ -1812,18 +1732,16 @@
                     showToast('⚠️ Please enter a valid email address.');
                     return;
                 }
-                // Process purchase
                 const orderId = 'FIFA-' + Date.now().toString(36).toUpperCase();
                 cart.forEach(item => {
                     for (let i = 0; i < item.qty; i++) {
                         purchasedTickets.push({
                             orderId,
                             matchId: item.matchId,
-                            match: { ...item.match },
+                            match: {...item.match},
                             category: item.category,
                             price: item.price,
-                            seatId: item.seatId || 'SEAT-' + Math.random().toString(36).substr(2, 6)
-                                .toUpperCase(),
+                            seatId: item.seatId || 'SEAT-' + Math.random().toString(36).substr(2, 6).toUpperCase(),
                             purchaseDate: new Date().toISOString(),
                             ticketNumber: 'FWC26-' + Math.random().toString(36).substr(2, 10).toUpperCase(),
                             gate: ['A', 'B', 'C', 'D', 'E'][Math.floor(Math.random() * 5)],
@@ -1837,12 +1755,11 @@
                 cart = [];
                 saveCart();
                 renderCart();
-                showToast('🎉 Purchase successful! Check your tickets in the dashboard.');
+                showToast('🎉 Purchase successful! View your tickets in the dashboard.');
                 navigateTo('dashboard');
                 renderDashboard();
             }
 
-            // ============ DASHBOARD ============
             function switchDashTab(tab, el) {
                 document.querySelectorAll('#dashSidebar a').forEach(a => a.classList.remove('active'));
                 if (el) el.classList.add('active');
@@ -1860,8 +1777,7 @@
                 const content = document.getElementById('dashContent');
                 if (tab === 'tickets') {
                     if (purchasedTickets.length === 0) {
-                        content.innerHTML =
-                            '<h3 style="font-family:var(--font-heading);margin-bottom:1.5rem;">🎫 My Tickets</h3><p style="color:var(--text-muted);">No tickets purchased yet. <a href="#" style="color:var(--gold);" onclick="navigateTo(\'matches\')">Buy your first ticket!</a></p>';
+                        content.innerHTML = '<h3 style="font-family:var(--font-heading);margin-bottom:1.5rem;">🎫 My Tickets</h3><p style="color:var(--text-muted);">No tickets purchased yet. <a href="#" style="color:var(--gold);" onclick="navigateTo(\'matches\')">Buy your first ticket!</a></p>';
                     } else {
                         content.innerHTML = `
                   <h3 style="font-family:var(--font-heading);margin-bottom:1.5rem;">🎫 My Tickets (${purchasedTickets.length})</h3>
@@ -1879,30 +1795,21 @@
                     </div>
                   `).join('')}
                 `;
-                        // Generate mini QR codes
                         setTimeout(() => {
                             purchasedTickets.forEach((t, i) => {
                                 const el = document.getElementById('qrMini' + i);
                                 if (el && typeof QRCode !== 'undefined') {
                                     el.innerHTML = '';
-                                    new QRCode(el, {
-                                        text: t.ticketNumber,
-                                        width: 70,
-                                        height: 70,
-                                        colorDark: '#000',
-                                        colorLight: '#fff',
-                                    });
+                                    new QRCode(el, { text: t.ticketNumber, width: 70, height: 70, colorDark: '#000', colorLight: '#fff' });
                                 }
                             });
                         }, 300);
                     }
                 } else if (tab === 'upcoming') {
                     const upcoming = purchasedTickets.filter(t => new Date(t.match.date) >= new Date());
-                    content.innerHTML =
-                        `<h3 style="font-family:var(--font-heading);margin-bottom:1.5rem;">📅 Upcoming Matches</h3>${upcoming.length===0?'<p style="color:var(--text-muted);">No upcoming matches.</p>':upcoming.map(t=>`<div class="ticket-card"><div style="font-size:2rem;">${t.match.home.flag} ${t.match.away.flag}</div><div><strong>${t.match.home.name} vs ${t.match.away.name}</strong><div style="color:var(--text-muted);">${t.match.date} | ${t.match.time}</div></div></div>`).join('')}`;
+                    content.innerHTML = `<h3 style="font-family:var(--font-heading);margin-bottom:1.5rem;">📅 Upcoming Matches</h3>${upcoming.length===0?'<p style="color:var(--text-muted);">No upcoming matches.</p>':upcoming.map(t=>`<div class="ticket-card"><div style="font-size:2rem;">${t.match.home.flag} ${t.match.away.flag}</div><div><strong>${t.match.home.name} vs ${t.match.away.name}</strong><div style="color:var(--text-muted);">${t.match.date} | ${t.match.time}</div></div></div>`).join('')}`;
                 } else if (tab === 'history') {
-                    content.innerHTML =
-                        `<h3 style="font-family:var(--font-heading);margin-bottom:1.5rem;">📜 Purchase History</h3>${purchasedTickets.length===0?'<p style="color:var(--text-muted);">No purchase history.</p>':purchasedTickets.map(t=>`<div class="ticket-card"><div>Order: <strong>${t.orderId}</strong></div><div>${t.match.home.name} vs ${t.match.away.name}</div><div style="color:var(--text-muted);">${new Date(t.purchaseDate).toLocaleDateString()}</div><div>${formatPrice(t.price)}</div></div>`).join('')}`;
+                    content.innerHTML = `<h3 style="font-family:var(--font-heading);margin-bottom:1.5rem;">📜 Purchase History</h3>${purchasedTickets.length===0?'<p style="color:var(--text-muted);">No purchase history.</p>':purchasedTickets.map(t=>`<div class="ticket-card"><div>Order: <strong>${t.orderId}</strong></div><div>${t.match.home.name} vs ${t.match.away.name}</div><div style="color:var(--text-muted);">${new Date(t.purchaseDate).toLocaleDateString()}</div><div>${formatPrice(t.price)}</div></div>`).join('')}`;
                 } else if (tab === 'profile') {
                     content.innerHTML = `
                 <h3 style="font-family:var(--font-heading);margin-bottom:1.5rem;">👤 Profile Settings</h3>
@@ -1917,14 +1824,11 @@
                     content.innerHTML = `
                 <h3 style="font-family:var(--font-heading);margin-bottom:1.5rem;">🔔 Notifications</h3>
                 <div class="glass-card">
-                  <p>📧 <strong>Ticket Alert:</strong> Semi-Final tickets now available!</p>
-                  <p style="color:var(--text-muted);">2 hours ago</p>
+                  <p>📧 <strong>Ticket Alert:</strong> Semi-Final tickets now available!</p><p style="color:var(--text-muted);">2 hours ago</p>
                   <hr style="border-color:var(--border);margin:1rem 0;">
-                  <p>✅ <strong>Purchase Confirmed:</strong> Your tickets for USA vs Canada have been confirmed.</p>
-                  <p style="color:var(--text-muted);">3 days ago</p>
+                  <p>✅ <strong>Purchase Confirmed:</strong> Your tickets for USA vs Canada have been confirmed.</p><p style="color:var(--text-muted);">3 days ago</p>
                   <hr style="border-color:var(--border);margin:1rem 0;">
-                  <p>⭐ <strong>Reminder:</strong> World Cup kicks off in 8 days!</p>
-                  <p style="color:var(--text-muted);">1 week ago</p>
+                  <p>⭐ <strong>Reminder:</strong> World Cup kicks off in 8 days!</p><p style="color:var(--text-muted);">1 week ago</p>
                 </div>`;
                 }
             }
@@ -1950,13 +1854,7 @@
                 setTimeout(() => {
                     const el = document.getElementById('qrBig');
                     if (el && typeof QRCode !== 'undefined') {
-                        new QRCode(el, {
-                            text: t.ticketNumber,
-                            width: 200,
-                            height: 200,
-                            colorDark: '#000',
-                            colorLight: '#fff',
-                        });
+                        new QRCode(el, { text: t.ticketNumber, width: 200, height: 200, colorDark: '#000', colorLight: '#fff' });
                     }
                 }, 200);
             }
@@ -1964,15 +1862,11 @@
             function closeQRModal() {
                 document.getElementById('qrModal').classList.remove('open');
             }
-            document.getElementById('qrModal').addEventListener('click', function(e) {
-                if (e.target === this) closeQRModal();
-            });
+            document.getElementById('qrModal').addEventListener('click', function(e) { if (e.target === this) closeQRModal(); });
 
-            // ============ RENDER MATCHES ============
             function renderMatchCard(match) {
                 const availClass = match.availability;
-                const availText = { high: 'Available', medium: 'Selling Fast', low: 'Limited!' } [availClass] ||
-                    'Available';
+                const availText = { high: 'Available', medium: 'Selling Fast', low: 'Limited!' }[availClass] || 'Available';
                 return `
               <div class="match-card" onclick="viewTicketDetail(${match.id})">
                 <div class="match-card-header">
@@ -1990,19 +1884,17 @@
                   <div><span class="availability-dot ${availClass}"></span> ${availText}</div>
                   <div class="ticket-price">From ${formatPrice(match.price)}</div>
                 </div>
-              </div>
-            `;
+              </div>`;
             }
 
             function renderFeaturedMatches() {
                 const container = document.getElementById('featuredMatches');
-                const featured = matches.slice(0, 6);
-                container.innerHTML = featured.map(m => renderMatchCard(m)).join('');
+                container.innerHTML = matches.slice(0, 6).map(m => renderMatchCard(m)).join('');
             }
 
-            function renderAllMatches(filteredMatches = null) {
+            function renderAllMatches(filtered = null) {
                 const container = document.getElementById('allMatches');
-                const data = filteredMatches || matches;
+                const data = filtered || matches;
                 container.innerHTML = data.map(m => renderMatchCard(m)).join('');
                 document.getElementById('noMatchesMsg').style.display = data.length === 0 ? 'block' : 'none';
             }
@@ -2010,25 +1902,21 @@
             function populateSearchFilters() {
                 const citySelect = document.getElementById('searchCity');
                 const stadiumSelect = document.getElementById('searchStadium');
-                citySelect.innerHTML = '<option value="">All Cities</option>' + cities.map(c =>
-                    `<option value="${c.name}">${c.name}</option>`).join('');
+                citySelect.innerHTML = '<option value="">All Cities</option>' + cities.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
                 const uniqueStadiums = [...new Set(matches.map(m => m.stadium))];
-                stadiumSelect.innerHTML = '<option value="">All Stadiums</option>' + uniqueStadiums.map(s =>
-                    `<option value="${s}">${s}</option>`).join('');
+                stadiumSelect.innerHTML = '<option value="">All Stadiums</option>' + uniqueStadiums.map(s => `<option value="${s}">${s}</option>`).join('');
             }
 
             function filterMatches() {
-                const teamQuery = document.getElementById('searchTeam').value.toLowerCase();
-                const cityQuery = document.getElementById('searchCity').value;
-                const stadiumQuery = document.getElementById('searchStadium').value;
-                const dateQuery = document.getElementById('searchDate').value;
+                const team = document.getElementById('searchTeam').value.toLowerCase();
+                const city = document.getElementById('searchCity').value;
+                const stadium = document.getElementById('searchStadium').value;
+                const date = document.getElementById('searchDate').value;
                 const filtered = matches.filter(m => {
-                    const matchTeam = (m.home.name + ' ' + m.away.name + ' ' + m.home.code + ' ' + m.away.code)
-                        .toLowerCase();
-                    if (teamQuery && !matchTeam.includes(teamQuery)) return false;
-                    if (cityQuery && m.city.name !== cityQuery) return false;
-                    if (stadiumQuery && m.stadium !== stadiumQuery) return false;
-                    if (dateQuery && m.date !== dateQuery) return false;
+                    if (team && !(m.home.name+' '+m.away.name+' '+m.home.code+' '+m.away.code).toLowerCase().includes(team)) return false;
+                    if (city && m.city.name !== city) return false;
+                    if (stadium && m.stadium !== stadium) return false;
+                    if (date && m.date !== date) return false;
                     return true;
                 });
                 renderAllMatches(filtered);
@@ -2039,8 +1927,7 @@
                 if (!match) return;
                 currentPage = 'ticket-detail';
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                const page = document.getElementById('page-ticket-detail');
-                page.classList.add('active');
+                document.getElementById('page-ticket-detail').classList.add('active');
                 selectedSeats = [];
                 const content = document.getElementById('ticketDetailContent');
                 content.innerHTML = `
@@ -2049,10 +1936,7 @@
                 <div class="glass-card">
                   <div style="display:flex;gap:2rem;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem;">
                     <div style="font-size:3rem;">${match.home.flag}</div>
-                    <div style="text-align:center;">
-                      <h2 style="font-family:var(--font-heading);">${match.home.name} vs ${match.away.name}</h2>
-                      <p style="color:var(--text-muted);">${match.group}</p>
-                    </div>
+                    <div style="text-align:center;"><h2 style="font-family:var(--font-heading);">${match.home.name} vs ${match.away.name}</h2><p style="color:var(--text-muted);">${match.group}</p></div>
                     <div style="font-size:3rem;">${match.away.flag}</div>
                   </div>
                   <div class="match-info-row"><i class="fas fa-calendar"></i> <strong>${match.date}</strong> at ${match.time}</div>
@@ -2066,17 +1950,10 @@
                     const prices=[match.price*2.5,match.price*1.6,match.price,match.price*5];
                     const benefits=['Premium center seats, lounge access','Great views, comfortable seating','Standard seating, great value','VIP lounge, catering, best views'];
                     const stock=[Math.floor(Math.random()*50)+5,Math.floor(Math.random()*100)+10,Math.floor(Math.random()*200)+20,Math.floor(Math.random()*10)+2];
-                    return `
-                    <div class="glass-card" style="margin-bottom:0.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
-                      <div>
-                        <strong>${cat}</strong>
-                        <div style="font-size:0.8rem;color:var(--text-muted);">${benefits[i]}</div>
-                        <div style="font-size:0.75rem;color:var(--text-muted);">${stock} tickets remaining</div>
-                      </div>
-                      <div style="text-align:right;">
-                        <div style="font-weight:700;color:var(--gold);font-size:1.2rem;">${formatPrice(prices[i])}</div>
-                        <button class="btn btn-primary btn-sm" onclick="addToCart(${match.id},'${cat}',${prices[i]})">Add to Cart</button>
-                      </div>
+                    return `<div class="glass-card" style="margin-bottom:0.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+                      <div><strong>${cat}</strong><div style="font-size:0.8rem;color:var(--text-muted);">${benefits[i]}</div><div style="font-size:0.75rem;color:var(--text-muted);">${stock} tickets left</div></div>
+                      <div style="text-align:right;"><div style="font-weight:700;color:var(--gold);font-size:1.2rem;">${formatPrice(prices[i])}</div>
+                      <button class="btn btn-primary btn-sm" onclick="addToCart(${match.id},'${cat}',${prices[i]})">Add to Cart</button></div>
                     </div>`;
                   }).join('')}
                 </div>
@@ -2087,18 +1964,14 @@
                 <div class="seating-area" id="seatingArea"></div>
                 <p style="text-align:center;margin-top:1rem;font-size:0.8rem;color:var(--text-muted);">Selected: <span id="selectedSeatInfo">None</span></p>
                 <button class="btn btn-primary btn-block" style="margin-top:0.5rem;" id="btnSelectSeats" disabled onclick="addSelectedSeats(${match.id})">Add Selected Seats to Cart</button>
-              </div>
-            `;
-                // Generate seating map
+              </div>`;
                 setTimeout(() => {
                     const seatingArea = document.getElementById('seatingArea');
-                    const categories = ['cat1', 'cat2', 'cat3', 'vip'];
                     let seatsHTML = '';
                     for (let i = 0; i < 64; i++) {
                         const cat = i < 16 ? 'vip' : i < 32 ? 'cat1' : i < 48 ? 'cat2' : 'cat3';
-                        const isTaken = Math.random() < 0.3;
-                        seatsHTML +=
-                            `<div class="seat ${cat} ${isTaken?'taken':''}" data-seat="${i}" data-cat="${cat}" onclick="${isTaken?'':'selectSeat(this)'}">${i+1}</div>`;
+                        const taken = Math.random() < 0.3;
+                        seatsHTML += `<div class="seat ${cat} ${taken?'taken':''}" data-seat="${i}" data-cat="${cat}" onclick="${taken?'':'selectSeat(this)'}">${i+1}</div>`;
                     }
                     seatingArea.innerHTML = seatsHTML;
                 }, 200);
@@ -2115,123 +1988,68 @@
                 } else {
                     selectedSeats = selectedSeats.filter(s => s.seatId !== seatId);
                 }
-                document.getElementById('selectedSeatInfo').textContent =
-                    selectedSeats.length > 0 ? selectedSeats.map(s => `Seat ${parseInt(s.seatId)+1} (${s.cat})`).join(
-                        ', ') : 'None';
+                document.getElementById('selectedSeatInfo').textContent = selectedSeats.length > 0 ? selectedSeats.map(s => `Seat ${parseInt(s.seatId)+1} (${s.cat})`).join(', ') : 'None';
                 document.getElementById('btnSelectSeats').disabled = selectedSeats.length === 0;
             }
 
             function addSelectedSeats(matchId) {
                 const match = matches.find(m => m.id === matchId);
                 if (!match || selectedSeats.length === 0) return;
-                const catPrices = { vip: match.price * 5, cat1: match.price * 2.5, cat2: match.price * 1.6,
-                    cat3: match.price };
-                const catNames = { vip: 'VIP Hospitality', cat1: 'Category 1', cat2: 'Category 2',
-                cat3: 'Category 3' };
-                selectedSeats.forEach(s => {
-                    addToCart(matchId, catNames[s.cat] || 'Category 3', catPrices[s.cat] || match.price, s
-                        .seatId);
-                });
+                const prices = { vip: match.price*5, cat1: match.price*2.5, cat2: match.price*1.6, cat3: match.price };
+                const names = { vip: 'VIP Hospitality', cat1: 'Category 1', cat2: 'Category 2', cat3: 'Category 3' };
+                selectedSeats.forEach(s => addToCart(matchId, names[s.cat], prices[s.cat], s.seatId));
                 selectedSeats = [];
                 document.getElementById('selectedSeatInfo').textContent = 'None';
                 document.getElementById('btnSelectSeats').disabled = true;
                 document.querySelectorAll('.seat.selected').forEach(s => s.classList.remove('selected'));
-                if (document.getElementById('cartSidebar').classList.contains('open')) {
-                    renderCart();
-                }
+                if (document.getElementById('cartSidebar').classList.contains('open')) renderCart();
             }
 
-            // ============ CITY CARDS ============
             function renderCityCards() {
-                const container = document.getElementById('cityCards');
-                container.innerHTML = cities.map(c => `
+                document.getElementById('cityCards').innerHTML = cities.map(c => `
               <div class="city-card">
                 <div class="city-card-img">${c.icon}</div>
-                <div class="city-card-body">
-                  <h4>${c.name}</h4>
-                  <p>🏟️ ${c.stadium}</p>
-                  <p class="capacity">Capacity: ${c.capacity} | ${c.country}</p>
-                </div>
-              </div>
-            `).join('');
+                <div class="city-card-body"><h4>${c.name}</h4><p>🏟️ ${c.stadium}</p><p class="capacity">Capacity: ${c.capacity} | ${c.country}</p></div>
+              </div>`).join('');
             }
 
-            // ============ COUNTDOWN ============
             function updateCountdown() {
                 const target = new Date('2026-06-11T15:00:00-04:00').getTime();
-                const now = Date.now();
-                const diff = Math.max(0, target - now);
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                const mins = Math.floor((diff / (1000 * 60)) % 60);
-                const secs = Math.floor((diff / 1000) % 60);
-                document.getElementById('countDays').textContent = String(days).padStart(2, '0');
-                document.getElementById('countHours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('countMins').textContent = String(mins).padStart(2, '0');
-                document.getElementById('countSecs').textContent = String(secs).padStart(2, '0');
+                const diff = Math.max(0, target - Date.now());
+                document.getElementById('countDays').textContent = String(Math.floor(diff/(1000*60*60*24))).padStart(2,'0');
+                document.getElementById('countHours').textContent = String(Math.floor((diff/(1000*60*60))%24)).padStart(2,'0');
+                document.getElementById('countMins').textContent = String(Math.floor((diff/(1000*60))%60)).padStart(2,'0');
+                document.getElementById('countSecs').textContent = String(Math.floor((diff/1000)%60)).padStart(2,'0');
             }
 
-            // ============ TOAST ============
-            function showToast(message) {
-                const container = document.getElementById('toastContainer');
-                const toast = document.createElement('div');
-                toast.className = 'toast';
-                toast.textContent = message;
-                container.appendChild(toast);
-                setTimeout(() => toast.remove(), 3000);
+            function showToast(msg) {
+                const t = document.createElement('div'); t.className='toast'; t.textContent=msg;
+                document.getElementById('toastContainer').appendChild(t);
+                setTimeout(()=>t.remove(),3000);
             }
 
-            // ============ RENDER ALL ============
             function renderAll() {
-                renderFeaturedMatches();
-                renderCityCards();
-                renderCart();
-                updateCartBadge();
-                updateCountdown();
-                if (currentPage === 'matches') { populateSearchFilters();
-                    renderAllMatches(); }
-                if (currentPage === 'checkout') renderCheckout();
-                if (currentPage === 'dashboard') renderDashboard();
+                renderFeaturedMatches(); renderCityCards(); renderCart(); updateCartBadge(); updateCountdown();
+                if (currentPage==='matches'){populateSearchFilters();renderAllMatches();}
+                if (currentPage==='checkout') renderCheckout();
+                if (currentPage==='dashboard') renderDashboard();
             }
 
-            // ============ INIT ============
             function init() {
                 initTheme();
-                renderFeaturedMatches();
-                renderCityCards();
-                updateCartBadge();
-                updateCountdown();
-                setInterval(updateCountdown, 1000);
-
-                // Navbar scroll effect
-                window.addEventListener('scroll', () => {
-                    const navbar = document.getElementById('navbar');
-                    if (window.scrollY > 50) navbar.classList.add('scrolled');
-                    else navbar.classList.remove('scrolled');
-                });
-
-                // Close mobile menu on outside click
-                document.addEventListener('click', (e) => {
-                    const navLinks = document.getElementById('navLinks');
-                    if (navLinks.classList.contains('show') && !e.target.closest('.navbar')) {
-                        navLinks.classList.remove('show');
+                renderFeaturedMatches(); renderCityCards(); updateCartBadge(); updateCountdown();
+                setInterval(updateCountdown,1000);
+                window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50));
+                document.addEventListener('click',e=>{if(!e.target.closest('.navbar')&&document.getElementById('navLinks').classList.contains('show'))document.getElementById('navLinks').classList.remove('show');});
+                document.addEventListener('keydown',e=>{
+                    if(e.key==='Escape'){
+                        if(document.getElementById('cartSidebar').classList.contains('open')) toggleCart();
+                        if(document.getElementById('qrModal').classList.contains('open')) closeQRModal();
                     }
                 });
-
-                // Keyboard shortcuts
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape') {
-                        if (document.getElementById('cartSidebar').classList.contains('open'))
-                    toggleCart();
-                        if (document.getElementById('qrModal').classList.contains('open'))
-                    closeQRModal();
-                    }
-                });
-
                 updateCartBadge();
             }
 
-            // ============ EXPOSE TO GLOBAL SCOPE ============
             window.navigateTo = navigateTo;
             window.toggleTheme = toggleTheme;
             window.toggleCart = toggleCart;
@@ -2248,12 +2066,7 @@
             window.switchDashTab = switchDashTab;
             window.updateCurrency = updateCurrency;
             window.filterMatches = filterMatches;
-
             init();
-            console.log('🏆 FIFA World Cup 2026 Ticketing Platform Ready');
-            console.log('📅 Countdown to June 11, 2026');
-            console.log('🛒 Cart stored in localStorage');
-            console.log('🎫 ' + purchasedTickets.length + ' purchased tickets on record');
         })();
     </script>
 </body>
