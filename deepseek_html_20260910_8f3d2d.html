@@ -1,0 +1,1981 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="gold">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Rabbit Hole — Mawanga · Market 39 · Nakuru</title>
+<meta name="description" content="The Rabbit Hole — a small bar with a big shelf in Mawanga, Market 39, Nakuru. Cocktails, Tusker on tap, live jazz and late nights.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THE RABBIT HOLE — core
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #06070a;
+  --bg-2:      #0b0d13;
+  --surface:   rgba(255,255,255,.045);
+  --surface-2: rgba(255,255,255,.07);
+  --border:    rgba(255,255,255,.09);
+  --border-2:  rgba(255,255,255,.16);
+  --text:      #f6f3ed;
+  --muted:     #8d8d99;
+  --muted-2:   #5e5e6b;
+
+  --accent:    #ffc857;
+  --accent-2:  #ff5e5b;
+  --glow:      rgba(255,200,87,.35);
+
+  --radius:    18px;
+  --radius-sm: 12px;
+  --shadow:    0 24px 60px -20px rgba(0,0,0,.85);
+  --ease:      cubic-bezier(.2,.7,.2,1);
+}
+
+html[data-theme="coral"] {
+  --accent: #ff5e5b; --accent-2: #ffc857; --glow: rgba(255,94,91,.35);
+}
+html[data-theme="teal"] {
+  --accent: #2ec4b6; --accent-2: #ffc857; --glow: rgba(46,196,182,.32);
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body.gate-open { overflow: hidden; }
+
+h1, h2, h3, h4, .display {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  letter-spacing: -.025em;
+  line-height: 1.05;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+.wrap { width: min(1240px, 92vw); margin-inline: auto; }
+.eyebrow {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .72rem; font-weight: 600;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---------- reveal ---------- */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+  transition-delay: var(--d, 0ms);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---------- cursor glow ---------- */
+.cursor-glow {
+  position: fixed; top: 0; left: 0;
+  width: 520px; height: 520px; border-radius: 50%;
+  background: radial-gradient(circle, var(--glow) 0%, transparent 62%);
+  pointer-events: none; z-index: 1;
+  transform: translate(-50%, -50%);
+  opacity: 0; transition: opacity .5s;
+  mix-blend-mode: screen;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cursor-glow { opacity: .55; }
+}
+
+/* ============================================================
+   AGE GATE
+   ============================================================ */
+.age-gate {
+  position: fixed; inset: 0; z-index: 9999;
+  background: radial-gradient(1000px 600px at 50% 30%, #16171f 0%, #06070a 70%);
+  display: grid; place-items: center;
+  padding: 1.5rem;
+  transition: opacity .7s var(--ease), visibility .7s;
+}
+.age-gate.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.gate-card {
+  max-width: 460px; width: 100%; text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  padding: 3rem 2rem 2.5rem;
+  backdrop-filter: blur(24px);
+  box-shadow: var(--shadow);
+}
+.gate-mark {
+  font-size: 2.6rem; margin-bottom: .5rem;
+  filter: drop-shadow(0 0 24px var(--glow));
+}
+.gate-card h2 { font-size: 1.9rem; margin-bottom: .6rem; }
+.gate-card h2 em { color: var(--accent); font-style: normal; }
+.gate-card p { color: var(--muted); font-size: .92rem; margin-bottom: 2rem; }
+.gate-actions { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
+.gate-btn {
+  border: 0; cursor: pointer; border-radius: 999px;
+  padding: .85rem 2rem; font-weight: 700; font-size: .82rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  transition: transform .2s var(--ease), background .2s, color .2s;
+}
+.gate-btn.yes { background: var(--accent); color: #17120a; }
+.gate-btn.yes:hover { transform: translateY(-2px) scale(1.02); }
+.gate-btn.no {
+  background: transparent; color: var(--muted);
+  border: 1px solid var(--border-2);
+}
+.gate-btn.no:hover { color: var(--text); border-color: var(--muted); }
+.gate-msg {
+  margin-top: 1.5rem; font-size: .82rem; color: var(--accent-2);
+  min-height: 1.2em; opacity: 0; transition: opacity .3s;
+}
+.gate-msg.show { opacity: 1; }
+
+/* ============================================================
+   HEADER / NAV
+   ============================================================ */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(6,7,10,.7);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+}
+.nav {
+  display: flex; align-items: center; gap: 1rem;
+  padding: .8rem 0; flex-wrap: wrap;
+}
+.brand {
+  display: flex; align-items: center; gap: .6rem;
+  margin-right: auto; text-decoration: none;
+}
+.brand-mark {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: linear-gradient(140deg, var(--accent), var(--accent-2));
+  display: grid; place-items: center;
+  font-size: 1.05rem; flex-shrink: 0;
+  box-shadow: 0 0 22px -4px var(--glow);
+}
+.brand-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700; font-size: .92rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  line-height: 1.15;
+}
+.brand-name span { color: var(--accent); }
+.brand-sub {
+  display: block; font-size: .58rem; letter-spacing: .22em;
+  color: var(--muted-2); font-weight: 500;
+}
+
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-links a {
+  text-decoration: none; color: var(--muted);
+  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  font-weight: 500; transition: color .2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; bottom: -6px;
+  height: 1px; width: 0; background: var(--accent);
+  transition: width .3s var(--ease);
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-right { display: flex; align-items: center; gap: .65rem; }
+
+.status-pill {
+  display: inline-flex; align-items: center; gap: .45rem;
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: .4rem .8rem; border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  white-space: nowrap;
+}
+.status-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--muted-2); flex-shrink: 0;
+}
+.status-pill.open .status-dot { background: #4ade80; box-shadow: 0 0 10px #4ade80; animation: pulse 2s infinite; }
+.status-pill.open { color: #4ade80; border-color: rgba(74,222,128,.3); }
+.status-pill.closed .status-dot { background: var(--accent-2); }
+.status-pill.closed { color: var(--accent-2); border-color: rgba(255,94,91,.3); }
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .45; transform: scale(.82); }
+}
+
+.theme-dots { display: flex; gap: .35rem; }
+.theme-dot {
+  width: 15px; height: 15px; border-radius: 50%;
+  border: 1.5px solid transparent; cursor: pointer;
+  transition: transform .2s, border-color .2s;
+}
+.theme-dot:hover { transform: scale(1.18); }
+.theme-dot.active { border-color: var(--text); }
+.theme-dot.g { background: #ffc857; }
+.theme-dot.c { background: #ff5e5b; }
+.theme-dot.t { background: #2ec4b6; }
+
+.tab-btn {
+  position: relative;
+  background: var(--surface); border: 1px solid var(--border-2);
+  border-radius: 999px; padding: .5rem 1rem .5rem .9rem;
+  display: inline-flex; align-items: center; gap: .5rem;
+  cursor: pointer; font-size: .76rem; font-weight: 600;
+  letter-spacing: .07em; text-transform: uppercase;
+  transition: border-color .2s, background .2s;
+}
+.tab-btn:hover { border-color: var(--accent); background: var(--surface-2); }
+.tab-btn.bump { animation: bump .4s var(--ease); }
+@keyframes bump {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+.tab-count {
+  display: grid; place-items: center;
+  min-width: 19px; height: 19px; padding: 0 .3rem;
+  border-radius: 999px; background: var(--accent); color: #17120a;
+  font-size: .68rem; font-weight: 800;
+}
+
+@media (max-width: 880px) {
+  .nav-links {
+    order: 3; width: 100%;
+    overflow-x: auto; padding-bottom: .3rem;
+    gap: 1.2rem; scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .theme-dots { display: none; }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative; overflow: hidden;
+  padding: 5.5rem 0 4.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(760px 500px at 8% -12%, var(--glow), transparent 62%),
+    radial-gradient(700px 480px at 96% 8%, rgba(255,94,91,.16), transparent 66%);
+  pointer-events: none;
+}
+.hero-grid {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1.05fr .95fr;
+  gap: 3.5rem; align-items: center;
+}
+@media (max-width: 940px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+.hero h1 {
+  font-size: clamp(2.9rem, 8.2vw, 5.4rem);
+  font-weight: 700; margin: 1rem 0 0;
+}
+.hero h1 .line { display: block; overflow: hidden; }
+.hero h1 .line > span {
+  display: block;
+  animation: riseIn 1s var(--ease) both;
+}
+.hero h1 .line:nth-child(2) > span { animation-delay: .12s; }
+.hero h1 .line:nth-child(3) > span { animation-delay: .24s; }
+@keyframes riseIn {
+  from { transform: translateY(105%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(100deg, var(--accent) 10%, var(--accent-2) 90%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-copy {
+  color: var(--muted); max-width: 44ch; margin-top: 1.6rem;
+  font-size: 1.02rem;
+}
+.hero-copy strong { color: var(--text); font-weight: 600; }
+
+.hero-cta { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 2.2rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  border-radius: 999px; padding: .95rem 1.8rem;
+  font-size: .8rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  transition: transform .22s var(--ease), background .22s, border-color .22s, color .22s;
+}
+.btn-primary {
+  background: var(--accent); color: #17120a;
+  box-shadow: 0 14px 34px -12px var(--glow);
+}
+.btn-primary:hover { transform: translateY(-2px); }
+.btn-ghost {
+  background: transparent; border-color: var(--border-2); color: var(--text);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-facts {
+  display: flex; gap: 2rem; margin-top: 2.8rem; flex-wrap: wrap;
+}
+.fact strong {
+  display: block; font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem; color: var(--accent); line-height: 1;
+}
+.fact span {
+  font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+/* hero collage */
+.collage {
+  position: relative; height: 470px;
+  perspective: 1200px;
+}
+@media (max-width: 940px) { .collage { height: 340px; } }
+.collage-item {
+  position: absolute; border-radius: 20px; overflow: hidden;
+  border: 1px solid var(--border-2);
+  box-shadow: var(--shadow);
+  background: linear-gradient(140deg, #2a2a35, #14141c);
+  transition: transform .5s var(--ease);
+  will-change: transform;
+}
+.collage-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .8s var(--ease);
+}
+.collage-item:hover img { transform: scale(1.06); }
+.collage-item.a {
+  width: 58%; height: 74%; top: 0; left: 0; z-index: 3;
+}
+.collage-item.b {
+  width: 44%; height: 52%; top: 12%; right: 0; z-index: 4;
+}
+.collage-item.c {
+  width: 50%; height: 46%; bottom: 0; right: 8%; z-index: 5;
+}
+.collage-badge {
+  position: absolute; bottom: 6%; left: 0; z-index: 6;
+  background: rgba(10,11,16,.82); backdrop-filter: blur(14px);
+  border: 1px solid var(--border-2); border-radius: 14px;
+  padding: .7rem 1rem;
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+.collage-badge strong {
+  display: block; font-family: 'Space Grotesk', sans-serif;
+  font-size: .95rem; color: var(--accent);
+}
+.collage-badge span {
+  font-size: .64rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.marquee {
+  border-block: 1px solid var(--border);
+  background: linear-gradient(90deg, rgba(255,200,87,.05), rgba(255,94,91,.05));
+  overflow: hidden; padding: .9rem 0;
+  position: relative;
+}
+.marquee::before, .marquee::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 90px; z-index: 2;
+  pointer-events: none;
+}
+.marquee::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+.marquee::after  { right: 0; background: linear-gradient(270deg, var(--bg), transparent); }
+.marquee-track {
+  display: flex; width: max-content;
+  animation: scrollX 42s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes scrollX {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .8rem; font-weight: 600;
+  letter-spacing: .22em; text-transform: uppercase;
+  padding: 0 1.6rem; white-space: nowrap; color: var(--muted);
+}
+.marquee-track span b { color: var(--accent); font-weight: 700; }
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+section { padding: 5.5rem 0; position: relative; z-index: 2; }
+@media (max-width: 700px) { section { padding: 3.8rem 0; } }
+
+.sec-head { margin-bottom: 2.6rem; max-width: 640px; }
+.sec-head h2 {
+  font-size: clamp(1.9rem, 4.4vw, 2.9rem);
+  font-weight: 700; margin: .6rem 0 .7rem;
+}
+.sec-head h2 em {
+  font-style: normal; color: var(--accent);
+}
+.sec-head p { color: var(--muted); font-size: .96rem; }
+
+/* ============================================================
+   MENU
+   ============================================================ */
+.filters {
+  display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 2rem;
+}
+.filter {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--muted); cursor: pointer;
+  font-size: .74rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: .55rem 1.1rem; border-radius: 999px;
+  transition: all .22s var(--ease);
+}
+.filter:hover { color: var(--text); border-color: var(--border-2); }
+.filter.active {
+  background: var(--accent); border-color: var(--accent);
+  color: #17120a;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+  gap: 1.1rem;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform .35s var(--ease), border-color .3s, box-shadow .35s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-2);
+  box-shadow: 0 26px 50px -24px rgba(0,0,0,.9), 0 0 0 1px rgba(255,200,87,.09);
+}
+.card[hidden] { display: none; }
+
+.card-media {
+  position: relative; aspect-ratio: 16/11; overflow: hidden;
+  background: linear-gradient(140deg, #2b2b38, #13141b);
+}
+.card-media img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .7s var(--ease), filter .4s;
+}
+.card:hover .card-media img { transform: scale(1.07); }
+.card-media::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(6,7,10,.72));
+  pointer-events: none;
+}
+.chip {
+  position: absolute; top: .7rem; left: .7rem; z-index: 2;
+  background: rgba(6,7,10,.7); backdrop-filter: blur(10px);
+  border: 1px solid var(--border-2);
+  font-size: .6rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  padding: .3rem .65rem; border-radius: 999px;
+  color: var(--accent);
+}
+.chip.hot { color: var(--accent-2); }
+
+.card-body {
+  padding: 1.05rem 1.15rem 1.2rem;
+  display: flex; flex-direction: column; gap: .5rem; flex: 1;
+}
+.card-top {
+  display: flex; justify-content: space-between;
+  align-items: baseline; gap: .7rem;
+}
+.card-top h3 { font-size: 1.02rem; font-weight: 600; }
+.price {
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--accent); font-weight: 700;
+  font-size: .92rem; white-space: nowrap;
+}
+.card-body p {
+  color: var(--muted); font-size: .83rem;
+  line-height: 1.55; flex: 1;
+}
+.add-btn {
+  align-self: flex-start;
+  background: transparent; border: 1px solid var(--border-2);
+  color: var(--text); cursor: pointer;
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: .5rem 1rem; border-radius: 999px;
+  transition: all .22s var(--ease);
+}
+.add-btn:hover {
+  background: var(--accent); border-color: var(--accent); color: #17120a;
+}
+.add-btn.added {
+  background: #4ade80; border-color: #4ade80; color: #06210f;
+}
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+.gallery {
+  columns: 3 240px; column-gap: 14px;
+}
+@media (max-width: 700px) { .gallery { columns: 2 160px; column-gap: 10px; } }
+.gallery figure {
+  break-inside: avoid; margin: 0 0 14px;
+  position: relative; border-radius: var(--radius-sm);
+  overflow: hidden; border: 1px solid var(--border);
+  background: linear-gradient(140deg, #23232e, #13141b);
+  cursor: pointer;
+}
+.gallery img {
+  width: 100%; height: auto; display: block;
+  transition: transform .8s var(--ease), filter .5s;
+}
+.gallery figure:hover img { transform: scale(1.05); filter: brightness(.72); }
+.gallery figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 1rem .9rem .8rem;
+  background: linear-gradient(0deg, rgba(6,7,10,.92), transparent);
+  font-size: .74rem; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--text);
+  transform: translateY(8px); opacity: 0;
+  transition: all .35s var(--ease);
+}
+.gallery figure:hover figcaption { transform: none; opacity: 1; }
+
+/* ============================================================
+   EVENTS
+   ============================================================ */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+}
+.event {
+  position: relative; overflow: hidden;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.6rem 1.4rem;
+  transition: transform .35s var(--ease), border-color .3s;
+}
+.event:hover { transform: translateY(-5px); border-color: var(--accent); }
+.event::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(300px 140px at 100% 0%, var(--glow), transparent 70%);
+  opacity: 0; transition: opacity .35s;
+  pointer-events: none;
+}
+.event:hover::before { opacity: 1; }
+.event-day {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: .9rem;
+}
+.event h3 { font-size: 1.2rem; margin-bottom: .5rem; }
+.event p { color: var(--muted); font-size: .85rem; }
+.event-time {
+  margin-top: 1.2rem; padding-top: .9rem;
+  border-top: 1px solid var(--border);
+  font-size: .74rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted-2);
+}
+
+/* ============================================================
+   RESERVE
+   ============================================================ */
+.reserve {
+  background: linear-gradient(160deg, rgba(255,200,87,.055), rgba(255,94,91,.045));
+  border-block: 1px solid var(--border);
+}
+.reserve-grid {
+  display: grid; grid-template-columns: 1fr 1.15fr;
+  gap: 3.5rem; align-items: start;
+}
+@media (max-width: 880px) { .reserve-grid { grid-template-columns: 1fr; gap: 2.2rem; } }
+
+.form { display: grid; gap: .9rem; }
+.field { display: grid; gap: .4rem; }
+.field label {
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--muted);
+}
+.field input, .field select, .field textarea {
+  background: rgba(0,0,0,.32);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-sm);
+  padding: .8rem 1rem; font-size: .9rem;
+  outline: none; transition: border-color .2s, box-shadow .2s;
+  width: 100%;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--glow);
+}
+.field select { appearance: none; cursor: pointer; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+@media (max-width: 460px) { .field-row { grid-template-columns: 1fr; } }
+
+.vibes { display: flex; gap: .5rem; flex-wrap: wrap; }
+.vibe {
+  border: 1px solid var(--border-2); background: transparent;
+  color: var(--muted); cursor: pointer;
+  font-size: .72rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: .5rem 1rem; border-radius: 999px;
+  transition: all .2s;
+}
+.vibe:hover { color: var(--text); }
+.vibe.active { background: var(--accent); border-color: var(--accent); color: #17120a; }
+
+.reserve-note {
+  margin-top: 1.5rem; padding: 1rem 1.1rem;
+  border-left: 2px solid var(--accent);
+  background: rgba(255,255,255,.03);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: .82rem; color: var(--muted);
+}
+
+/* ============================================================
+   LOCATION
+   ============================================================ */
+.loc-grid {
+  display: grid; grid-template-columns: .9fr 1.1fr;
+  gap: 2rem; align-items: stretch;
+}
+@media (max-width: 880px) { .loc-grid { grid-template-columns: 1fr; } }
+
+.loc-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.8rem;
+  display: flex; flex-direction: column; gap: 1.4rem;
+}
+.loc-row { display: flex; gap: .9rem; }
+.loc-icon {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border-radius: 11px; display: grid; place-items: center;
+  background: linear-gradient(140deg, var(--accent), var(--accent-2));
+  color: #17120a; font-size: 1rem;
+}
+.loc-row strong {
+  display: block; font-size: .68rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--muted-2); margin-bottom: .2rem;
+}
+.loc-row p, .loc-row a {
+  font-size: .92rem; color: var(--text); text-decoration: none;
+  line-height: 1.5;
+}
+.loc-row a:hover { color: var(--accent); }
+
+.map-wrap {
+  border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border); min-height: 380px;
+  position: relative; background: #101218;
+}
+.map-wrap iframe {
+  width: 100%; height: 100%; min-height: 380px;
+  border: 0; display: block;
+  filter: invert(92%) hue-rotate(180deg) contrast(.88) saturate(.7);
+}
+
+/* ============================================================
+   TAB DRAWER
+   ============================================================ */
+.backdrop {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(3,3,6,.72); backdrop-filter: blur(4px);
+  opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s;
+}
+.backdrop.show { opacity: 1; visibility: visible; }
+
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 210;
+  width: min(420px, 100vw);
+  background: #0c0e14;
+  border-left: 1px solid var(--border-2);
+  display: flex; flex-direction: column;
+  transform: translateX(102%);
+  transition: transform .45s var(--ease);
+  box-shadow: -30px 0 70px -20px rgba(0,0,0,.9);
+}
+.drawer.open { transform: none; }
+.drawer-head {
+  padding: 1.4rem 1.5rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.drawer-head h3 { font-size: 1.15rem; }
+.drawer-head span { font-size: .72rem; color: var(--muted); display: block; letter-spacing: .1em; text-transform: uppercase; }
+.drawer-close {
+  background: transparent; border: 1px solid var(--border-2);
+  width: 34px; height: 34px; border-radius: 50%;
+  cursor: pointer; color: var(--muted);
+  display: grid; place-items: center; font-size: 1rem;
+  transition: all .2s;
+}
+.drawer-close:hover { color: var(--text); border-color: var(--accent); }
+
+.drawer-body { flex: 1; overflow-y: auto; padding: 1.2rem 1.5rem; }
+.tab-empty {
+  text-align: center; color: var(--muted-2);
+  font-size: .88rem; padding: 3rem 1rem;
+}
+
+.tab-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .35rem .8rem;
+  padding: .9rem 0;
+  border-bottom: 1px dashed var(--border);
+  align-items: center;
+}
+.tab-item-info strong { display: block; font-size: .9rem; font-weight: 600; }
+.tab-item-info span { font-size: .72rem; color: var(--muted-2); }
+.tab-item-total {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700; color: var(--accent); font-size: .9rem;
+  text-align: right;
+}
+.tab-item-qty {
+  display: flex; align-items: center; gap: .55rem;
+  grid-column: 1 / -1;
+}
+.tab-item-qty button {
+  width: 26px; height: 26px; border-radius: 8px;
+  background: var(--surface-2); border: 1px solid var(--border-2);
+  color: var(--text); cursor: pointer; font-size: .9rem;
+  display: grid; place-items: center; line-height: 1;
+  transition: all .18s;
+}
+.tab-item-qty button:hover { border-color: var(--accent); color: var(--accent); }
+.tab-item-qty span { font-size: .85rem; font-weight: 600; min-width: 18px; text-align: center; }
+
+.drawer-foot {
+  padding: 1.2rem 1.5rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: rgba(255,255,255,.02);
+}
+.sum-row {
+  display: flex; justify-content: space-between;
+  font-size: .84rem; color: var(--muted); padding: .28rem 0;
+}
+.sum-row.total {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem; font-weight: 700; color: var(--text);
+  padding-top: .7rem; margin-top: .5rem;
+  border-top: 1px solid var(--border);
+}
+.sum-row.total span:last-child { color: var(--accent); }
+.drawer-foot .btn { width: 100%; justify-content: center; margin-top: 1.1rem; }
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast {
+  position: fixed; bottom: 1.6rem; left: 50%; z-index: 400;
+  transform: translate(-50%, 140%);
+  background: #12141c; border: 1px solid var(--border-2);
+  border-radius: 999px; padding: .8rem 1.4rem;
+  font-size: .84rem; font-weight: 500;
+  box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: .6rem;
+  transition: transform .45s var(--ease);
+  max-width: 90vw;
+}
+.toast.show { transform: translate(-50%, 0); }
+.toast .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 3.5rem 0 2.5rem;
+  background: #040507;
+}
+.foot-grid {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 2rem;
+}
+@media (max-width: 800px) {
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
+}
+.foot-brand p { color: var(--muted); font-size: .85rem; margin-top: 1rem; max-width: 30ch; }
+.foot-col h4 {
+  font-size: .68rem; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--muted-2); margin-bottom: 1rem;
+}
+.foot-col a, .foot-col p {
+  display: block; color: var(--muted); text-decoration: none;
+  font-size: .86rem; margin-bottom: .55rem; transition: color .2s;
+}
+.foot-col a:hover { color: var(--accent); }
+.foot-bottom {
+  margin-top: 3rem; padding-top: 1.6rem;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; gap: 1rem;
+  flex-wrap: wrap; font-size: .76rem; color: var(--muted-2);
+}
+.foot-bottom a { color: var(--muted-2); text-decoration: none; }
+.foot-bottom a:hover { color: var(--accent); }
+
+/* ============================================================
+   RESPONSIVE TWEAKS
+   ============================================================ */
+@media (max-width: 520px) {
+  .hero { padding: 3.6rem 0 3rem; }
+  .collage { height: 280px; }
+  .hero-facts { gap: 1.4rem; }
+  .fact strong { font-size: 1.25rem; }
+  .drawer { width: 100vw; }
+}
+</style>
+</head>
+<body class="gate-open">
+
+<!-- ================= AGE GATE ================= -->
+<div class="age-gate" id="ageGate">
+  <div class="gate-card">
+    <div class="gate-mark">🐇</div>
+    <h2>Down the <em>Rabbit Hole</em>?</h2>
+    <p>You must be 18 or older to enter. We serve alcohol and we take that seriously.</p>
+    <div class="gate-actions">
+      <button class="gate-btn yes" id="gateYes">I'm 18 or older</button>
+      <button class="gate-btn no" id="gateNo">Not yet</button>
+    </div>
+    <div class="gate-msg" id="gateMsg"></div>
+  </div>
+</div>
+
+<!-- ================= CURSOR GLOW ================= -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <div class="brand-mark">🐇</div>
+      <div class="brand-name">
+        The Rabbit <span>Hole</span>
+        <span class="brand-sub">Mawanga · Nakuru</span>
+      </div>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#events">Events</a>
+      <a href="#reserve">Reserve</a>
+      <a href="#find">Find Us</a>
+    </nav>
+
+    <div class="nav-right">
+      <div class="theme-dots" id="themeDots">
+        <button class="theme-dot g active" data-theme="gold" aria-label="Gold theme"></button>
+        <button class="theme-dot c" data-theme="coral" aria-label="Coral theme"></button>
+        <button class="theme-dot t" data-theme="teal" aria-label="Teal theme"></button>
+      </div>
+
+      <div class="status-pill" id="statusPill">
+        <span class="status-dot"></span>
+        <span id="statusText">Checking…</span>
+      </div>
+
+      <button class="tab-btn" id="tabBtn">
+        <span>Tab</span>
+        <span class="tab-count" id="tabCount" style="display:none">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Est. 2019 · Mawanga · Market 39</div>
+        <h1>
+          <span class="line"><span>DOWN THE</span></span>
+          <span class="line"><span><em>RABBIT HOLE</em></span></span>
+          <span class="line"><span>IN NAKURU.</span></span>
+        </h1>
+        <p class="hero-copy">
+          A small bar with a big shelf. Cold <strong>Tusker on tap</strong>,
+          proper cocktails, Kenyan AA espresso martinis and whatever bottle
+          we're excited about this week. Twelve stools. No fuss. Walk-ins welcome.
+        </p>
+        <div class="hero-cta">
+          <a href="#menu" class="btn btn-primary">See the menu →</a>
+          <a href="#reserve" class="btn btn-ghost">Book a table</a>
+        </div>
+        <div class="hero-facts">
+          <div class="fact"><strong>18+</strong><span>Only</span></div>
+          <div class="fact"><strong>7</strong><span>Days a week</span></div>
+          <div class="fact"><strong>40+</strong><span>Bottles open</span></div>
+        </div>
+      </div>
+
+      <div class="collage" id="collage">
+        <div class="collage-item a" data-depth="14">
+          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=75"
+               alt="Cocktails lined up on the bar" loading="eager"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="collage-item b" data-depth="26">
+          <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=700&q=75"
+               alt="Espresso martini" loading="eager"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="collage-item c" data-depth="20">
+          <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=700&q=75"
+               alt="Cold beer being poured" loading="eager"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="collage-badge">
+          <strong>Happy Hour 4–6</strong>
+          <span>KSh 100 off everything</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MARQUEE ================= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <span><b>Tusker on tap</b> ✦ Dawa cocktails ✦ Live jazz Tuesdays ✦ DJ sets Fridays ✦
+        Nyama choma bites ✦ Kenyan AA espresso martini ✦ Open till late ✦
+        Mawanga · Market 39 · Nakuru ✦ <b>Down the rabbit hole</b> ✦ </span>
+      <span><b>Tusker on tap</b> ✦ Dawa cocktails ✦ Live jazz Tuesdays ✦ DJ sets Fridays ✦
+        Nyama choma bites ✦ Kenyan AA espresso martini ✦ Open till late ✦
+        Mawanga · Market 39 · Nakuru ✦ <b>Down the rabbit hole</b> ✦ </span>
+    </div>
+  </div>
+
+  <!-- ================= MENU ================= -->
+  <section id="menu">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">The Menu</div>
+        <h2>Pour something <em>worth talking about.</em></h2>
+        <p>Prices in Kenyan Shillings. Ask about the back shelf — it's not on here.
+           Kitchen closes at 10pm, bar keeps going.</p>
+      </div>
+
+      <div class="filters reveal" id="filters">
+        <button class="filter active" data-cat="all">All</button>
+        <button class="filter" data-cat="cocktail">Cocktails</button>
+        <button class="filter" data-cat="spirit">Spirits</button>
+        <button class="filter" data-cat="beer">Beer &amp; Cider</button>
+        <button class="filter" data-cat="wine">Wine</button>
+        <button class="filter" data-cat="na">Zero Proof</button>
+        <button class="filter" data-cat="bite">Bar Bites</button>
+      </div>
+
+      <div class="menu-grid" id="menuGrid">
+
+        <!-- COCKTAILS -->
+        <article class="card reveal" data-cat="cocktail" style="--d:0ms">
+          <div class="card-media">
+            <span class="chip hot">Signature</span>
+            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=700&q=70"
+                 alt="Dawa cocktail" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Dawa</h3><span class="price">KSh 900</span></div>
+            <p>Vodka, wild honey, fresh lime, crushed ice. Kenya's own cure-all. Stirred, never shaken.</p>
+            <button class="add-btn" data-name="Dawa" data-price="900">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="cocktail" style="--d:60ms">
+          <div class="card-media">
+            <span class="chip">House Favourite</span>
+            <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=700&q=70"
+                 alt="Espresso martini" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Kenyan AA Espresso Martini</h3><span class="price">KSh 950</span></div>
+            <p>Single-origin Kenyan AA, vodka, coffee liqueur. Grown three hours from this bar.</p>
+            <button class="add-btn" data-name="Espresso Martini" data-price="950">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="cocktail" style="--d:120ms">
+          <div class="card-media">
+            <span class="chip">Classic</span>
+            <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=700&q=70"
+                 alt="Negroni cocktail" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Negroni</h3><span class="price">KSh 1,100</span></div>
+            <p>Equal parts gin, sweet vermouth, Campari. Orange peel expressed over the top.</p>
+            <button class="add-btn" data-name="Negroni" data-price="1100">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="cocktail" style="--d:180ms">
+          <div class="card-media">
+            <span class="chip">Smoked</span>
+            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=700&q=70"
+                 alt="Old Fashioned cocktail" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Old Fashioned</h3><span class="price">KSh 1,000</span></div>
+            <p>Rye, demerara, two dashes of bitters, one very large rock. Cherry if you're nice.</p>
+            <button class="add-btn" data-name="Old Fashioned" data-price="1000">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="cocktail" style="--d:240ms">
+          <div class="card-media">
+            <span class="chip">Fresh</span>
+            <img src="https://images.unsplash.com/photo-1587223962930-cb7f31384c19?auto=format&fit=crop&w=700&q=70"
+                 alt="Passion fruit mojito" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Passion Mojito</h3><span class="price">KSh 850</span></div>
+            <p>White rum, fresh passion fruit, mint, lime, soda. Dangerous in threes.</p>
+            <button class="add-btn" data-name="Passion Mojito" data-price="850">Add to tab</button>
+          </div>
+        </article>
+
+        <!-- SPIRITS -->
+        <article class="card reveal" data-cat="spirit" style="--d:0ms">
+          <div class="card-media">
+            <span class="chip">Single Malt</span>
+            <img src="https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=700&q=70"
+                 alt="Single malt whisky" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Glenfiddich 12</h3><span class="price">KSh 1,200</span></div>
+            <p>Speyside single malt. Pear, subtle oak, clean finish. Neat or with one cube.</p>
+            <button class="add-btn" data-name="Glenfiddich 12" data-price="1200">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="spirit" style="--d:60ms">
+          <div class="card-media">
+            <span class="chip">Local</span>
+            <img src="https://images.unsplash.com/photo-1560512823-829485b8bf24?auto=format&fit=crop&w=700&q=70"
+                 alt="Whisky being poured" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Kenya Cane</h3><span class="price">KSh 400</span></div>
+            <p>The people's pour. Served with a cold soda on the side, the way it should be.</p>
+            <button class="add-btn" data-name="Kenya Cane" data-price="400">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="spirit" style="--d:120ms">
+          <div class="card-media">
+            <span class="chip">Gin</span>
+            <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=700&q=70"
+                 alt="Gin and tonic" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Gilbey's &amp; Tonic</h3><span class="price">KSh 500</span></div>
+            <p>London dry, Indian tonic, a fat wedge of lime. Built in a tall glass, plenty of ice.</p>
+            <button class="add-btn" data-name="Gilbey's & Tonic" data-price="500">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="spirit" style="--d:180ms">
+          <div class="card-media">
+            <span class="chip">Tequila</span>
+            <img src="https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?auto=format&fit=crop&w=700&q=70"
+                 alt="Tequila shot" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Reposado Tequila</h3><span class="price">KSh 800</span></div>
+            <p>Aged eight months. Vanilla, cooked agave, clean finish. Salt and lime optional.</p>
+            <button class="add-btn" data-name="Reposado Tequila" data-price="800">Add to tab</button>
+          </div>
+        </article>
+
+        <!-- BEER -->
+        <article class="card reveal" data-cat="beer" style="--d:0ms">
+          <div class="card-media">
+            <span class="chip hot">On Tap</span>
+            <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=700&q=70"
+                 alt="Tusker lager on tap" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Tusker Lager</h3><span class="price">KSh 350</span></div>
+            <p>Kenya's own. Ice cold, poured with a proper head. The one you have two of.</p>
+            <button class="add-btn" data-name="Tusker Lager" data-price="350">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="beer" style="--d:60ms">
+          <div class="card-media">
+            <span class="chip">Crisp</span>
+            <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&w=700&q=70"
+                 alt="White Cap lager" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>White Cap Crisp</h3><span class="price">KSh 350</span></div>
+            <p>Lighter, drier, dangerously easy. Best after a long Nakuru afternoon.</p>
+            <button class="add-btn" data-name="White Cap Crisp" data-price="350">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="beer" style="--d:120ms">
+          <div class="card-media">
+            <span class="chip">Stout</span>
+            <img src="https://images.unsplash.com/photo-1436076863939-06870fe779c2?auto=format&fit=crop&w=700&q=70"
+                 alt="Guinness stout" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Guinness FES</h3><span class="price">KSh 400</span></div>
+            <p>Foreign Extra Stout. Roasty, rich, 7.5%. Sip it, don't rush it.</p>
+            <button class="add-btn" data-name="Guinness FES" data-price="400">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="beer" style="--d:180ms">
+          <div class="card-media">
+            <span class="chip">Cider</span>
+            <img src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&w=700&q=70"
+                 alt="Cider bottle" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Balozi Cider</h3><span class="price">KSh 380</span></div>
+            <p>Apple-forward, lightly sparkling. Served over ice if you ask nicely.</p>
+            <button class="add-btn" data-name="Balozi Cider" data-price="380">Add to tab</button>
+          </div>
+        </article>
+
+        <!-- WINE -->
+        <article class="card reveal" data-cat="wine" style="--d:0ms">
+          <div class="card-media">
+            <span class="chip">Glass</span>
+            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=700&q=70"
+                 alt="Glass of red wine" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>House Red</h3><span class="price">KSh 650</span></div>
+            <p>Six ounces of something South African and inexpensive. In a good way.</p>
+            <button class="add-btn" data-name="House Red" data-price="650">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="wine" style="--d:60ms">
+          <div class="card-media">
+            <span class="chip">Glass</span>
+            <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?auto=format&fit=crop&w=700&q=70"
+                 alt="Glass of white wine" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>House White</h3><span class="price">KSh 650</span></div>
+            <p>Chenin Blanc. Crisp, a little honeyed, very cold. Goes down far too easily.</p>
+            <button class="add-btn" data-name="House White" data-price="650">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="wine" style="--d:120ms">
+          <div class="card-media">
+            <span class="chip">Bubbles</span>
+            <img src="https://images.unsplash.com/photo-1547595628-c61a29f496f0?auto=format&fit=crop&w=700&q=70"
+                 alt="Sparkling wine" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Sparkling, glass</h3><span class="price">KSh 750</span></div>
+            <p>Dry, cold, celebratory. For Fridays, promotions and mild excuses.</p>
+            <button class="add-btn" data-name="Sparkling Glass" data-price="750">Add to tab</button>
+          </div>
+        </article>
+
+        <!-- ZERO PROOF -->
+        <article class="card reveal" data-cat="na" style="--d:0ms">
+          <div class="card-media">
+            <span class="chip">0.0%</span>
+            <img src="https://images.unsplash.com/photo-1497534446932-c925b458314e?auto=format&fit=crop&w=700&q=70"
+                 alt="Virgin cocktail" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Virgin Dawa</h3><span class="price">KSh 400</span></div>
+            <p>All the honey and lime, none of the vodka. The designated driver's friend.</p>
+            <button class="add-btn" data-name="Virgin Dawa" data-price="400">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="na" style="--d:60ms">
+          <div class="card-media">
+            <span class="chip">0.0%</span>
+            <img src="https://images.unsplash.com/photo-1437418747212-8d9709afab22?auto=format&fit=crop&w=700&q=70"
+                 alt="Passion fruit fizz" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Passion Fizz</h3><span class="price">KSh 350</span></div>
+            <p>Fresh passion fruit, lime, sparkling water. Sharp, cold, refreshing.</p>
+            <button class="add-btn" data-name="Passion Fizz" data-price="350">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="na" style="--d:120ms">
+          <div class="card-media">
+            <span class="chip">0.0%</span>
+            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=70"
+                 alt="Cold brew coffee" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Kenyan Chai Cold Brew</h3><span class="price">KSh 300</span></div>
+            <p>Kenyan AA coffee, cold brewed 18 hours, finished with a touch of chai.</p>
+            <button class="add-btn" data-name="Chai Cold Brew" data-price="300">Add to tab</button>
+          </div>
+        </article>
+
+        <!-- BITES -->
+        <article class="card reveal" data-cat="bite" style="--d:0ms">
+          <div class="card-media">
+            <span class="chip hot">Kitchen</span>
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=70"
+                 alt="Nyama choma" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Nyama Choma Bites</h3><span class="price">KSh 600</span></div>
+            <p>Grilled goat, kachumbari, ugali squares. The best thing to eat at 11pm.</p>
+            <button class="add-btn" data-name="Nyama Choma Bites" data-price="600">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="bite" style="--d:60ms">
+          <div class="card-media">
+            <span class="chip">Kitchen</span>
+            <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=700&q=70"
+                 alt="Masala chips" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Masala Chips</h3><span class="price">KSh 400</span></div>
+            <p>Hand-cut, tossed in house masala, served with a chilli-garlic dip.</p>
+            <button class="add-btn" data-name="Masala Chips" data-price="400">Add to tab</button>
+          </div>
+        </article>
+
+        <article class="card reveal" data-cat="bite" style="--d:120ms">
+          <div class="card-media">
+            <span class="chip">Nibbles</span>
+            <img src="https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&fit=crop&w=700&q=70"
+                 alt="Roasted nuts" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="card-body">
+            <div class="card-top"><h3>Chilli Roasted Nuts</h3><span class="price">KSh 250</span></div>
+            <p>Warm, salted, a little fiery. Free refills while you're drinking.</p>
+            <button class="add-btn" data-name="Chilli Roasted Nuts" data-price="250">Add to tab</button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GALLERY ================= -->
+  <section id="gallery" style="background: linear-gradient(180deg, transparent, rgba(255,255,255,.018), transparent);">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">The Room</div>
+        <h2>Low light, <em>high spirits.</em></h2>
+        <p>Brick walls, warm bulbs, a bar top that's seen a few things. This is what it looks like
+           on a Friday night in Mawanga.</p>
+      </div>
+
+      <div class="gallery reveal">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=700&q=70"
+               alt="Bar interior at night" loading="lazy" onerror="this.style.display='none'">
+          <figcaption>The bar · 9pm</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=700&q=70"
+               alt="Drinks on a table" loading="lazy" onerror="this.style.display='none'">
+          <figcaption>Friday service</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?auto=format&fit=crop&w=700&q=70"
+               alt="Bartender at work" loading="lazy" onerror="this.style.display='none'">
+          <figcaption>Behind the stick</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=700&q=70"
+               alt="Cocktail close up" loading="lazy" onerror="this.style.display='none'">
+          <figcaption>Espresso martini</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1574096079513-d8259312b785?auto=format&fit=crop&w=700&q=70"
+               alt="Bar shelves" loading="lazy" onerror="this.style.display='none'">
+          <figcaption>The back shelf</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1546171753-97d7676e4602?auto=format&fit=crop&w=700&q=70"
+               alt="Bar seating" loading="lazy" onerror="this.style.display='none'">
+          <figcaption>Twelve stools</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=700&q=70"
+               alt="Beer being poured" loading="lazy" onerror="this.style.display='none'">
+          <figcaption>Tusker, poured right</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=700&q=70"
+               alt="Row of cocktails" loading="lazy" onerror="this.style.display='none'">
+          <figcaption>Round for the table</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=700&q=70"
+               alt="Bar lights" loading="lazy" onerror="this.style.display='none'">
+          <figcaption>Warm bulbs, cold drinks</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EVENTS ================= -->
+  <section id="events">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">What's On</div>
+        <h2>Something happening <em>every night.</em></h2>
+        <p>Live music, DJs, tasting nights and the occasional surprise. No cover charge, ever.</p>
+      </div>
+
+      <div class="events-grid">
+        <div class="event reveal" style="--d:0ms">
+          <div class="event-day">Tuesday</div>
+          <h3>Live Jazz</h3>
+          <p>A rotating trio from the Nakuru scene. Horns, upright bass, the good stuff.</p>
+          <div class="event-time">8pm – 11pm · Free entry</div>
+        </div>
+        <div class="event reveal" style="--d:80ms">
+          <div class="event-day">Wednesday</div>
+          <h3>Whisky Wednesdays</h3>
+          <p>Three pours, one region, one price. Learn something or just drink it.</p>
+          <div class="event-time">7pm – 10pm · KSh 1,500 flight</div>
+        </div>
+        <div class="event reveal" style="--d:160ms">
+          <div class="event-day">Friday</div>
+          <h3>DJ Sets</h3>
+          <p>Afro-house, gengetone, amapiano and whatever the selector feels like.</p>
+          <div class="event-time">9pm – 2am · Free entry</div>
+        </div>
+        <div class="event reveal" style="--d:240ms">
+          <div class="event-day">Sunday</div>
+          <h3>Slow Sundays</h3>
+          <p>Acoustic sets, nyama choma on the grill, and the football on the small screen.</p>
+          <div class="event-time">2pm – 10pm · Free entry</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESERVE ================= -->
+  <section class="reserve" id="reserve">
+    <div class="wrap reserve-grid">
+      <div class="reveal">
+        <div class="eyebrow">Reservations</div>
+        <h2 style="font-size: clamp(1.9rem, 4.4vw, 2.9rem); margin: .6rem 0 .9rem;">
+          Grab a <em style="font-style:normal; color:var(--accent)">stool.</em>
+        </h2>
+        <p style="color: var(--muted); font-size: .96rem;">
+          We only take bookings for groups of four or more, and only until 9pm.
+          After that it's first come, first served — that's the rule.
+        </p>
+        <div class="reserve-note">
+          <strong style="color: var(--text);">Walk-ins always welcome.</strong><br>
+          We hold reserved tables for 20 minutes past the booking time, then we give them away.
+        </div>
+      </div>
+
+      <form class="form reveal" id="reserveForm" style="--d:100ms">
+        <div class="field-row">
+          <div class="field">
+            <label for="rName">Name</label>
+            <input id="rName" type="text" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="rPhone">Phone</label>
+            <input id="rPhone" type="tel" placeholder="+254 7XX XXX XXX" required>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="rDate">Date</label>
+            <input id="rDate" type="date" required>
+          </div>
+          <div class="field">
+            <label for="rTime">Time</label>
+            <select id="rTime" required>
+              <option value="">Pick a time</option>
+              <option>4:00 PM</option>
+              <option>5:00 PM</option>
+              <option>6:00 PM</option>
+              <option>7:00 PM</option>
+              <option>8:00 PM</option>
+              <option>9:00 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="rGuests">How many of you?</label>
+          <select id="rGuests" required>
+            <option value="">Select group size</option>
+            <option>4 people</option>
+            <option>5 people</option>
+            <option>6 people</option>
+            <option>7–10 people</option>
+            <option>10+ (we'll call you)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>What's the vibe?</label>
+          <div class="vibes" id="vibes">
+            <button type="button" class="vibe active" data-vibe="Chill">Chill</button>
+            <button type="button" class="vibe" data-vibe="Birthday">Birthday</button>
+            <button type="button" class="vibe" data-vibe="Date night">Date night</button>
+            <button type="button" class="vibe" data-vibe="After work">After work</button>
+            <button type="button" class="vibe" data-vibe="Just drinks">Just drinks</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="rNotes">Anything else?</label>
+          <textarea id="rNotes" rows="3" placeholder="Allergies, seating preference, a surprise…"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="justify-content:center; margin-top:.4rem;">
+          Request table →
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= LOCATION ================= -->
+  <section id="find">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">Find Us</div>
+        <h2>Mawanga, <em>Market 39.</em></h2>
+        <p>Look for the unlit sign. We're the door next to the shoe repair stand.
+           If you reach the matatu stage, you've gone too far.</p>
+      </div>
+
+      <div class="loc-grid">
+        <div class="loc-card reveal">
+          <div class="loc-row">
+            <div class="loc-icon">📍</div>
+            <div>
+              <strong>Address</strong>
+              <p>Market 39, Mawanga<br>Nakuru, Kenya</p>
+            </div>
+          </div>
+          <div class="loc-row">
+            <div class="loc-icon">🕐</div>
+            <div>
+              <strong>Hours</strong>
+              <p>Mon: Closed<br>Tue–Thu: 4pm – 12am<br>Fri–Sat: 3pm – 2am<br>Sun: 2pm – 10pm</p>
+            </div>
+          </div>
+          <div class="loc-row">
+            <div class="loc-icon">📞</div>
+            <div>
+              <strong>Phone</strong>
+              <a href="tel:+254700000000">+254 700 000 000</a>
+            </div>
+          </div>
+          <div class="loc-row">
+            <div class="loc-icon">✉️</div>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:hello@rabbithole.co.ke">hello@rabbithole.co.ke</a>
+            </div>
+          </div>
+          <div class="loc-row">
+            <div class="loc-icon">📱</div>
+            <div>
+              <strong>Social</strong>
+              <p><a href="#" style="color:var(--accent)">@rabbithole.nakuru</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-wrap reveal" style="--d:100ms">
+          <iframe
+            title="Map of Mawanga, Nakuru"
+            src="https://www.google.com/maps?q=Mawanga,+Nakuru,+Kenya&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand">
+          <div class="brand-mark">🐇</div>
+          <div class="brand-name">The Rabbit <span>Hole</span>
+            <span class="brand-sub">Mawanga · Nakuru</span>
+          </div>
+        </a>
+        <p>A small bar with a big shelf. Twelve stools, a short menu, and a very good time.</p>
+      </div>
+
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#events">Events</a>
+        <a href="#reserve">Reserve</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>Visit</h4>
+        <p>Market 39, Mawanga</p>
+        <p>Nakuru, Kenya</p>
+        <a href="tel:+254700000000">+254 700 000 000</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>Hours</h4>
+        <p>Tue–Thu · 4pm – 12am</p>
+        <p>Fri–Sat · 3pm – 2am</p>
+        <p>Sun · 2pm – 10pm</p>
+        <p>Mon · Closed</p>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> The Rabbit Hole. Must be 18+ to drink. Please don't drink and drive.</span>
+      <span>Built in Nakuru 🇰🇪</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= TAB DRAWER ================= -->
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" aria-label="Your tab">
+  <div class="drawer-head">
+    <div>
+      <h3>Your Tab</h3>
+      <span id="drawerSub">Nothing yet</span>
+    </div>
+    <button class="drawer-close" id="drawerClose" aria-label="Close">✕</button>
+  </div>
+
+  <div class="drawer-body" id="drawerBody">
+    <p class="tab-empty">Your tab is empty.<br>Start pouring →</p>
+  </div>
+
+  <div class="drawer-foot">
+    <div class="sum-row"><span>Subtotal</span><span id="tabSubtotal">KSh 0</span></div>
+    <div class="sum-row"><span>Service (10%)</span><span id="tabService">KSh 0</span></div>
+    <div class="sum-row total"><span>Total</span><span id="tabTotal">KSh 0</span></div>
+    <button class="btn btn-primary" id="sendOrder">Send to the bar →</button>
+  </div>
+</aside>
+
+<!-- ================= TOAST ================= -->
+<div class="toast" id="toast">
+  <span class="dot"></span>
+  <span id="toastText">Added</span>
+</div>
+
+<script>
+/* ============================================================
+   1. AGE GATE
+   ============================================================ */
+(function () {
+  const gate = document.getElementById('ageGate');
+  const yes  = document.getElementById('gateYes');
+  const no   = document.getElementById('gateNo');
+  const msg  = document.getElementById('gateMsg');
+
+  if (sessionStorage.getItem('rh-age-ok') === '1') {
+    gate.classList.add('hidden');
+    document.body.classList.remove('gate-open');
+  }
+
+  yes.addEventListener('click', () => {
+    sessionStorage.setItem('rh-age-ok', '1');
+    gate.classList.add('hidden');
+    document.body.classList.remove('gate-open');
+    setTimeout(() => toast('Welcome to The Rabbit Hole 🐇'), 700);
+  });
+
+  no.addEventListener('click', () => {
+    msg.textContent = "Come back when you're 18. We'll keep a stool warm.";
+    msg.classList.add('show');
+  });
+})();
+
+/* ============================================================
+   2. CURSOR GLOW
+   ============================================================ */
+(function () {
+  const glow = document.getElementById('cursorGlow');
+  let x = window.innerWidth / 2, y = window.innerHeight / 2;
+  let tx = x, ty = y;
+
+  window.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+
+  (function loop() {
+    x += (tx - x) * 0.12;
+    y += (ty - y) * 0.12;
+    glow.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ============================================================
+   3. LIVE OPEN / CLOSED STATUS (Africa/Nairobi)
+   ============================================================ */
+(function () {
+  const pill = document.getElementById('statusPill');
+  const text = document.getElementById('statusText');
+
+  // minutes-from-midnight schedule; end > 1440 means it spills past midnight
+  const schedule = {
+    0: [14 * 60, 22 * 60],          // Sunday   2pm – 10pm
+    1: null,                         // Monday   closed
+    2: [16 * 60, 24 * 60],          // Tuesday  4pm – 12am
+    3: [16 * 60, 24 * 60],          // Wednesday
+    4: [16 * 60, 24 * 60],          // Thursday
+    5: [15 * 60, 26 * 60],          // Friday   3pm – 2am
+    6: [15 * 60, 26 * 60]           // Saturday 3pm – 2am
+  };
+
+  function nairobiNow() {
+    return new Date(new Date().toLocaleString('en-US', { timeZone: 'Africa/Nairobi' }));
+  }
+
+  function check() {
+    const n = nairobiNow();
+    const day = n.getDay();
+    const mins = n.getHours() * 60 + n.getMinutes();
+
+    let open = false;
+    const today = schedule[day];
+    if (today && mins >= today[0] && mins < today[1]) open = true;
+
+    // spill-over from previous day (past midnight)
+    if (!open && mins < 180) {
+      const prev = schedule[(day + 6) % 7];
+      if (prev && prev[1] > 1440 && mins + 1440 < prev[1]) open = true;
+    }
+
+    pill.classList.toggle('open', open);
+    pill.classList.toggle('closed', !open);
+    text.textContent = open ? 'Open Now' : 'Closed';
+
+    // Today's hours highlight in footer-ish contexts (optional)
+    document.documentElement.dataset.open = open ? '1' : '0';
+  }
+
+  check();
+  setInterval(check, 30000);
+})();
+
+/* ============================================================
+   4. THEME SWITCHER
+   ============================================================ */
+(function () {
+  const dots = document.querySelectorAll('.theme-dot');
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      dots.forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+      document.documentElement.setAttribute('data-theme', dot.dataset.theme);
+    });
+  });
+})();
+
+/* ============================================================
+   5. MENU FILTERING
+   ============================================================ */
+(function () {
+  const filters = document.querySelectorAll('.filter');
+  const cards = document.querySelectorAll('#menuGrid .card');
+
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      cards.forEach(card => {
+        card.hidden = cat !== 'all' && card.dataset.cat !== cat;
+      });
+    });
+  });
+})();
+
+/* ============================================================
+   6. RUNNING TAB (drawer, quantities, totals)
+   ============================================================ */
+const Tab = (function () {
+  const items = new Map(); // name -> { name, price, qty }
+
+  const drawer    = document.getElementById('drawer');
+  const backdrop  = document.getElementById('backdrop');
+  const body      = document.getElementById('drawerBody');
+  const countEl   = document.getElementById('tabCount');
+  const subEl     = document.getElementById('drawerSub');
+  const subTotEl  = document.getElementById('tabSubtotal');
+  const servEl    = document.getElementById('tabService');
+  const totEl     = document.getElementById('tabTotal');
+  const btn       = document.getElementById('tabBtn');
+
+  function open()  { drawer.classList.add('open');  backdrop.classList.add('show'); }
+  function close() { drawer.classList.remove('open'); backdrop.classList.remove('show'); }
+
+  btn.addEventListener('click', open);
+  document.getElementById('drawerClose').addEventListener('click', close);
+  backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+  function render() {
+    const list = [...items.values()];
+    const count = list.reduce((s, i) => s + i.qty, 0);
+    const subtotal = list.reduce((s, i) => s + i.qty * i.price, 0);
+    const service = Math.round(subtotal * 0.1);
+    const total = subtotal + service;
+
+    // badge
+    countEl.textContent = count;
+    countEl.style.display = count ? 'grid' : 'none';
+
+    // subtitle
+    subEl.textContent = count
+      ? `${count} item${count > 1 ? 's' : ''} · KSh ${subtotal.toLocaleString()}`
+      : 'Nothing yet';
+
+    // body
+    if (!list.length) {
+      body.innerHTML = '<p class="tab-empty">Your tab is empty.<br>Start pouring →</p>';
+    } else {
+      body.innerHTML = list.map(i => `
+        <div class="tab-item">
+          <div class="tab-item-info">
+            <strong>${i.name}</strong>
+            <span>KSh ${i.price.toLocaleString()} each</span>
+          </div>
+          <div class="tab-item-total">KSh ${(i.price * i.qty).toLocaleString()}</div>
+          <div class="tab-item-qty">
+            <button data-act="dec" data-name="${i.name}" aria-label="Remove one">−</button>
+            <span>${i.qty}</span>
+            <button data-act="inc" data-name="${i.name}" aria-label="Add one">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    subTotEl.textContent = `KSh ${subtotal.toLocaleString()}`;
+    servEl.textContent   = `KSh ${service.toLocaleString()}`;
+    totEl.textContent    = `KSh ${total.toLocaleString()}`;
+  }
+
+  function add(name, price) {
+    const item = items.get(name) || { name, price, qty: 0 };
+    item.qty += 1;
+    items.set(name, item);
+    render();
+    pulse();
+  }
+
+  function change(name, delta) {
+    const item = items.get(name);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) items.delete(name);
+    render();
+  }
+
+  function pulse() {
+    btn.classList.remove('bump');
+    void btn.offsetWidth;
+    btn.classList.add('bump');
+  }
+
+  // delegated controls inside the drawer
+  body.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-act]');
+    if (!b) return;
+    change(b.dataset.name, b.dataset.act === 'inc' ? 1 : -1);
+  });
+
+  // "Add to tab" buttons on cards
+  document.querySelectorAll('.add-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      add(b.dataset.name, Number(b.dataset.price));
+      const original = b.textContent;
+      b.textContent = 'Added ✓';
+      b.classList.add('added');
+      setTimeout(() => {
+        b.textContent = original;
+        b.classList.remove('added');
+      }, 900);
+      toast(`${b.dataset.name} added to your tab`);
+    });
+  });
+
+  // send order
+  document.getElementById('sendOrder').addEventListener('click', () => {
+    if (!items.size) { toast('Your tab is empty — add something first'); return; }
+    toast('Order sent to the bar 🍸 Someone is on it.');
+    items.clear();
+    render();
+    setTimeout(close, 900);
+  });
+
+  render();
+
+  return { add, render };
+})();
+
+/* ============================================================
+   7. TOAST
+   ============================================================ */
+let toastTimer;
+function toast(message) {
+  const el = document.getElementById('toast');
+  document.getElementById('toastText').textContent = message;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+/* ============================================================
+   8. RESERVE FORM
+   ============================================================ */
+(function () {
+  const vibes = document.querySelectorAll('.vibe');
+  let chosenVibe = 'Chill';
+
+  vibes.forEach(v => {
+    v.addEventListener('click', () => {
+      vibes.forEach(x => x.classList.remove('active'));
+      v.classList.add('active');
+      chosenVibe = v.dataset.vibe;
+    });
+  });
+
+  const form = document.getElementById('reserveForm');
+
+  // default the date input to today
+  const dateInput = document.getElementById('rDate');
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.min = today;
+  dateInput.value = today;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('rName').value.trim();
+    const guests = document.getElementById('rGuests').value;
+    const time = document.getElementById('rTime').value;
+
+    if (!name || !guests || !time) {
+      toast('Please fill in name, time and group size');
+      return;
+    }
+
+    toast(`Asante ${name}! Table for ${guests} at ${time} — we'll confirm by SMS.`);
+    form.reset();
+    dateInput.value = today;
+    vibes.forEach((x, i) => x.classList.toggle('active', i === 0));
+  });
+})();
+
+/* ============================================================
+   9. SCROLL REVEAL
+   ============================================================ */
+(function () {
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('in'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  els.forEach(el => io.observe(el));
+})();
+
+/* ============================================================
+   10. HERO PARALLAX
+   ============================================================ */
+(function () {
+  const collage = document.getElementById('collage');
+  if (!collage) return;
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  const layers = collage.querySelectorAll('[data-depth]');
+
+  collage.addEventListener('mousemove', (e) => {
+    const rect = collage.getBoundingClientRect();
+    const cx = (e.clientX - rect.left) / rect.width - 0.5;
+    const cy = (e.clientY - rect.top) / rect.height - 0.5;
+
+    layers.forEach(layer => {
+      const depth = Number(layer.dataset.depth);
+      layer.style.transform =
+        `translate(${cx * depth}px, ${cy * depth}px) rotate(${cx * 2}deg)`;
+    });
+  });
+
+  collage.addEventListener('mouseleave', () => {
+    layers.forEach(l => { l.style.transform = ''; });
+  });
+})();
+
+/* ============================================================
+   11. YEAR
+   ============================================================ */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
